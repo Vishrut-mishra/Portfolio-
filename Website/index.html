@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishrut Mishra | Global Strategy & AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="overlay-texture"></div>
+
+    <header class="main-header">
+        <img src="logo.png" alt="VM Logo" class="logo-img">
+        <nav class="pill-nav">
+            <a href="about.html">About</a>
+            <a href="#work">Work</a>
+            <a href="#blog">Blog</a>
+            <a href="#ai-chatbox" id="nav-chat-trigger">AI Chatbox</a>
+        </nav>
+        <a href="contact.html" class="contact-btn">Contact</a>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-headline animate-hero">Hi, I am Vishrut MISHRA and I Aspire to Master the Mechanics of
+                    Global
+                    Strategy.</h1>
+                <p class="hero-subtext animate-hero animate-delay-1">Namaste! I am a business student. I build with data
+                    and lead with AI. As a
+                    problem
+                    solver, I am a learner of the future, comfortable with technology and driven by the impact I can
+                    leave on the global market.</p>
+
+
+            </div>
+            <div class="hero-visual animate-hero animate-delay-2">
+                <div class="portrait-container floating-avatar">
+                    <img src="Avatar.jpeg" alt="Vishrut Mishra" class="portrait-img">
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="projects-section">
+            <h2 class="section-title reveal">Selected Works</h2>
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <article class="project-card store-card reveal" data-type="ml">
+                    <div class="card-content">
+                        <span class="project-category">Machine Learning</span>
+                        <h3 class="project-title">Store Sales Forecasting</h3>
+                        <p class="project-desc">Time-series demand forecasting across 54 store locations for Corporación
+                            Favorita using XGBoost and feature engineering.</p>
+                    </div>
+                </article>
+                <!-- Project 2 -->
+                <article class="project-card default-recovery-card reveal" data-type="recovery">
+                    <div class="card-content">
+                        <span class="project-category">Strategy</span>
+                        <h3 class="project-title">Default Recovery</h3>
+                        <p class="project-desc">Recovered 85% of outstanding fees through data-driven negotiation.</p>
+                    </div>
+                </article>
+                <!-- Project 3 -->
+                <article class="project-card vibe-coding-card reveal">
+                    <div class="card-content">
+                        <span class="project-category">Web Development</span>
+                        <h3 class="project-title">Vibe Coding</h3>
+                        <p class="project-desc">This portfolio itself—built with AI, driven by intent, and refined
+                            through iteration.</p>
+                    </div>
+                </article>
+                <!-- Project 4 -->
+                <article class="project-card aeromodelling-card reveal" data-type="aero">
+                    <div class="card-content">
+                        <span class="project-category">Engineering &amp; Leadership</span>
+                        <h3 class="project-title">Aeromodelling Club</h3>
+                        <p class="project-desc">Autonomous flight capabilities demonstrating leadership in engineering
+                            constraints.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="projects-section">
+            <h2 class="section-title reveal">Latest Thoughts</h2>
+            <div class="project-grid">
+                <article class="project-card prisoners-card reveal" data-type="blog">
+                    <div class="card-content">
+                        <span class="project-category">Global Strategy</span>
+                        <h3 class="project-title">Prisoners of Geography</h3>
+                        <p class="project-desc">Decoding the physical mechanics of the 21st-century world.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Project/Blog Detail Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <!-- Content injected via JS -->
+                <div class="modal-image-container">
+                    <img id="modal-img" src="" alt="">
+                </div>
+                <div class="modal-text-container">
+                    <span id="modal-category" class="project-category"></span>
+                    <h2 id="modal-title"></h2>
+                    <div id="modal-description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbox Widget -->
+    <div id="ai-chatbox" class="chatbox-container hidden">
+        <div class="chatbox-header">
+            <span class="chat-title">Shrey</span>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+        <div class="chatbox-messages" id="chat-messages">
+            <div class="message ai-message">
+                Hi! I'm Shrey — Vishrut's digital avatar, created to answer your questions about his work, projects, and
+                time in France.
+            </div>
+        </div>
+        <div class="chatbox-input">
+            <input type="text" id="user-input" placeholder="Ask me anything...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

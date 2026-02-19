@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Vishrut Mishra</title>
+    <meta name="description"
+        content="Get in touch with Vishrut Mishra — business student, AI strategist, and data practitioner.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Contact Page Specific Styles ── */
+        .contact-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 80px;
+            max-width: 1100px;
+            width: 100%;
+            align-items: start;
+        }
+
+        /* ── Left: Info Panel ── */
+        .contact-info {
+            padding-top: 10px;
+        }
+
+        .contact-eyebrow {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--pop-color);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .contact-headline {
+            font-family: 'Inter', sans-serif;
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--tertiary-text);
+            font-weight: 700;
+        }
+
+        .contact-body {
+            color: var(--secondary-accents);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .detail-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* ── Right: Form ── */
+        .contact-form-card {
+            background: #2A2A2A;
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--tertiary-text);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--secondary-accents);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--tertiary-text);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            width: 100%;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #555;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: rgba(229, 9, 20, 0.5);
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.08);
+        }
+
+        .form-group textarea {
+            height: 140px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--pop-color);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(229, 9, 20, 0.35);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ── Success State ── */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .form-success .check-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .form-success h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .form-success p {
+            color: var(--secondary-accents);
+            font-size: 0.95rem;
+        }
+
+        /* ── Back Link ── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary-accents);
+            font-size: 0.85rem;
+            margin-bottom: 32px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-headline {
+                font-size: 2.2rem;
+            }
+
+            .contact-form-card {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay-texture"></div>
+
+    <header class="main-header">
+        <a href="index.html">
+            <img src="logo.png" alt="VM Logo" class="logo-img">
+        </a>
+        <nav class="pill-nav">
+            <a href="index.html#about">About</a>
+            <a href="index.html#work">Work</a>
+            <a href="index.html#blog">Blog</a>
+            <a href="index.html#ai-chatbox" id="nav-chat-trigger-contact">AI Chatbox</a>
+        </nav>
+        <a href="contact.html" class="contact-btn">Contact</a>
+    </header>
+
+    <main>
+        <section class="contact-page">
+            <div class="contact-wrapper">
+
+                <!-- Left: Info -->
+                <div class="contact-info">
+                    <a href="index.html" class="back-link">← Back to Portfolio</a>
+                    <p class="contact-eyebrow">Get in Touch</p>
+                    <h1 class="contact-headline">Let's start a conversation.</h1>
+                    <p class="contact-body">
+                        Whether you have a project in mind, a question about my work, or just want to connect — I'm
+                        always open to hearing from you.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <div class="detail-icon">📍</div>
+                            <span>Lyon, France &mdash; emlyon business school</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="detail-icon">✉️</div>
+                            <span>vishrut.mishra@edu.em-lyon.com</span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="detail-icon">🌐</div>
+                            <span>Open to remote collaborations worldwide</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="contact-form-card">
+                    <p class="form-title">Send me a message</p>
+
+                    <form id="contact-form" action="https://formspree.io/f/mqedlrpe" method="POST">
+
+                        <!-- Name + Email row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+
+                        <!-- Company + Position row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company" placeholder="Your Company">
+                            </div>
+                            <div class="form-group">
+                                <label for="position">Position / Role</label>
+                                <input type="text" id="position" name="position" placeholder="Your Role">
+                            </div>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" placeholder="How can I help you?" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submit-btn">Send Message →</button>
+                    </form>
+
+                    <!-- Success state (shown after submission) -->
+                    <div class="form-success" id="form-success">
+                        <div class="check-icon">✅</div>
+                        <h3>Message sent!</h3>
+                        <p>Thanks for reaching out. I'll get back to you as soon as I can.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Show a success message after form submission (Formspree redirects back by default,
+        // but we intercept with fetch for a smooth no-redirect experience)
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-btn');
+        const successPanel = document.getElementById('form-success');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
+
+            const data = new FormData(form);
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    form.style.display = 'none';
+                    successPanel.style.display = 'block';
+                } else {
+                    btn.textContent = 'Failed — please try again';
+                    btn.disabled = false;
+                }
+            } catch {
+                btn.textContent = 'Failed — please try again';
+                btn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

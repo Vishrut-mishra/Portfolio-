@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Vishrut Mishra</title>
+    <meta name="description"
+        content="Interactive CV of Vishrut Mishra — MiM student at EmLyon, data practitioner, and AI-native builder.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ═══════════════════════════════════════════
+           ABOUT PAGE — LOCAL STYLES
+        ═══════════════════════════════════════════ */
+        :root {
+            --accent: #E50914;
+            --accent-glow: rgba(229, 9, 20, 0.15);
+            --card: #2A2A2A;
+            --card-border: rgba(255, 255, 255, 0.07);
+            --text-muted: #7B7B7B;
+            --text-body: #ccc;
+            --text-bright: #F8F8F8;
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .about-page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 140px 40px 80px;
+        }
+
+        /* ── Section Headers ── */
+        .cv-section {
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .section-label span {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--card-border);
+        }
+
+        /* ── Page Hero ── */
+        .about-hero {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            margin-bottom: 80px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .hero-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--card-border);
+            flex-shrink: 0;
+            filter: grayscale(20%);
+        }
+
+        .hero-text h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-text .role {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .stat-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat-pill {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            color: var(--text-body);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-pill .dot {
+            color: var(--accent);
+        }
+
+        /* ── Education Timeline ── */
+        .edu-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .edu-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .edu-card:hover {
+            border-color: rgba(229, 9, 20, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .edu-left {
+            flex: 1;
+        }
+
+        .edu-school {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .edu-degree {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .edu-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .edu-tag {
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            color: #ff6b6b;
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .edu-right {
+            text-align: right;
+            flex-shrink: 0;
+            padding-left: 24px;
+        }
+
+        .edu-date {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .edu-gpa {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        .edu-gpa-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Project / Experience Cards ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .cards-grid.single {
+            grid-template-columns: 1fr;
+        }
+
+        .cards-grid.double {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cards-grid.triple {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .cv-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 30px;
+            cursor: pointer;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+
+        .cv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .cv-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(229, 9, 20, 0.25);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+        }
+
+        .cv-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            color: #ff6b6b;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            align-self: flex-start;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .card-subtitle {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-body);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .card-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .card-cta {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: gap 0.2s ease;
+        }
+
+        .cv-card:hover .card-cta {
+            gap: 8px;
+        }
+
+        /* ── Achievement Cards ── */
+        .achievement-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 30px;
+            text-align: center;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card.clickable {
+            cursor: pointer;
+        }
+
+        .achievement-card.clickable:hover {
+            transform: translateY(-4px);
+            border-color: rgba(229, 9, 20, 0.3);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+        }
+
+        .achievement-card.empty {
+            opacity: 0.4;
+            border-style: dashed;
+        }
+
+        .achievement-score {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            line-height: 1;
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+
+        .achievement-score-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .achievement-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+        }
+
+        .achievement-date {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .cert-badge.available {
+            background: rgba(229, 9, 20, 0.1);
+            border-color: rgba(229, 9, 20, 0.3);
+            color: #ff6b6b;
+            cursor: pointer;
+        }
+
+        .cert-badge.coming-soon {
+            opacity: 0.5;
+        }
+
+        /* ── Skills Grid ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .skill-item {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .skill-item:hover {
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .skill-item img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .skill-name {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Custom SVG skill icons for tools without devicons */
+        .skill-icon-custom {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Methodology pills */
+        .method-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .method-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 8px 18px;
+            font-size: 0.82rem;
+            color: var(--text-body);
+            font-weight: 500;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .method-pill:hover {
+            border-color: rgba(229, 9, 20, 0.3);
+            color: var(--text-bright);
+        }
+
+        /* ── Language Section ── */
+        .lang-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .lang-item {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px 24px;
+            min-width: 140px;
+        }
+
+        .lang-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .lang-level {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .lang-bar {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .lang-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* ── Extracurricular ── */
+        .extra-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .extra-item {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px 28px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .extra-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(229, 9, 20, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .extra-role {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .extra-org {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .extra-points {
+            list-style: none;
+            padding: 0;
+        }
+
+        .extra-points li {
+            font-size: 0.84rem;
+            color: var(--text-body);
+            line-height: 1.6;
+            padding-left: 14px;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .extra-points li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+
+        /* ═══════════════════════════════════════════
+           MODAL
+        ═══════════════════════════════════════════ */
+        .cv-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(6px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cv-modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .cv-modal {
+            background: #1c1c1c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 740px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 48px;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            scrollbar-width: thin;
+            scrollbar-color: #333 transparent;
+        }
+
+        .cv-modal-overlay.show .cv-modal {
+            transform: scale(1);
+        }
+
+        .cv-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .cv-modal-close:hover {
+            color: var(--text-bright);
+        }
+
+        .cv-modal-tag {
+            display: inline-block;
+            background: rgba(229, 9, 20, 0.12);
+            border: 1px solid rgba(229, 9, 20, 0.25);
+            color: #ff6b6b;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .cv-modal h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+        }
+
+        .cv-modal .modal-meta {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cv-modal .modal-divider {
+            height: 1px;
+            background: var(--card-border);
+            margin: 28px 0;
+        }
+
+        .cv-modal .modal-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .cv-modal p {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .cv-modal ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        .cv-modal ul li {
+            font-size: 0.9rem;
+            color: var(--text-body);
+            line-height: 1.7;
+            padding-left: 18px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .cv-modal ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.75rem;
+            top: 3px;
+        }
+
+        .modal-highlight-box {
+            background: rgba(229, 9, 20, 0.06);
+            border: 1px solid rgba(229, 9, 20, 0.15);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .modal-highlight-box .stat {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            letter-spacing: -1px;
+        }
+
+        .modal-highlight-box .stat-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .modal-highlights-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .cards-grid.triple {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-hero {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .about-page {
+                padding: 120px 20px 60px;
+            }
+
+            .cards-grid.triple,
+            .cards-grid.double {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-highlights-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cv-modal {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay-texture"></div>
+
+    <!-- ── Header ── -->
+    <header class="main-header">
+        <a href="index.html"><img src="logo.png" alt="VM Logo" class="logo-img"></a>
+        <nav class="pill-nav">
+            <a href="index.html#work">Work</a>
+            <a href="about.html">About</a>
+            <a href="index.html#blog">Blog</a>
+            <a href="index.html#ai-chatbox">AI Chatbox</a>
+        </nav>
+        <a href="contact.html" class="contact-btn">Contact</a>
+    </header>
+
+    <main>
+        <div class="about-page">
+
+            <!-- ═══════════ HERO ═══════════ -->
+            <div class="about-hero">
+                <img src="Avatar.jpeg" alt="Vishrut Mishra" class="hero-avatar">
+                <div class="hero-text">
+                    <h1>Vishrut Mishra</h1>
+                    <p class="role">Masters in Management · EmLyon Business School · Lyon, France</p>
+                    <div class="stat-pills">
+                        <span class="stat-pill"><span class="dot">●</span> CGPA 4/4 at EmLyon</span>
+                        <span class="stat-pill"><span class="dot">●</span> 97th Percentile — JEE Mains</span>
+                        <span class="stat-pill"><span class="dot">●</span> GMAT Focus 615</span>
+                        <span class="stat-pill"><span class="dot">●</span> TOSA Excel 876</span>
+                        <span class="stat-pill"><span class="dot">●</span> Lyon, France 🇫🇷</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════ EDUCATION ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Education</span></div>
+                <div class="edu-timeline">
+                    <div class="edu-card">
+                        <div class="edu-left">
+                            <div class="edu-school">EmLyon Business School</div>
+                            <div class="edu-degree">Masters in Management (MiM)</div>
+                            <div class="edu-tags">
+                                <span class="edu-tag">Strategy</span>
+                                <span class="edu-tag">Business Statistics</span>
+                                <span class="edu-tag">Accounting</span>
+                                <span class="edu-tag">HRM</span>
+                            </div>
+                        </div>
+                        <div class="edu-right">
+                            <div class="edu-date">Sep 2025 — Present</div>
+                            <div class="edu-gpa">4 / 4</div>
+                            <div class="edu-gpa-label">CGPA</div>
+                        </div>
+                    </div>
+
+                    <div class="edu-card">
+                        <div class="edu-left">
+                            <div class="edu-school">National Institute of Technology, Rourkela <span
+                                    style="color:var(--text-muted);font-weight:400;font-size:0.82rem;">(NIRF #13)</span>
+                            </div>
+                            <div class="edu-degree">Bachelor of Technology — Industrial Design</div>
+                            <div class="edu-tags">
+                                <span class="edu-tag">Economics</span>
+                                <span class="edu-tag">Business Statistics</span>
+                                <span class="edu-tag">Elements of Design</span>
+                                <span class="edu-tag">Human Resources</span>
+                            </div>
+                        </div>
+                        <div class="edu-right">
+                            <div class="edu-date">Aug 2019 — Dec 2023</div>
+                            <div class="edu-gpa">7.4 / 10</div>
+                            <div class="edu-gpa-label">CGPA</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════ ACADEMIC PROJECTS ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Academic Projects</span></div>
+                <div class="cards-grid triple">
+
+                    <!-- BlendFast -->
+                    <div class="cv-card" onclick="openModal('blendfast')">
+                        <div>
+                            <span class="card-tag">Startup · EmLyon</span>
+                            <div class="card-title">BlendFast</div>
+                            <div class="card-subtitle">Workplace Nutrition · Lyon, France</div>
+                            <p class="card-desc">A B2B2C marketplace for healthy, convenient food at the workplace —
+                                validated through on-ground market research in Lyon.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Sep – Dec 2025</span>
+                            <span class="card-cta">Read more →</span>
+                        </div>
+                    </div>
+
+                    <!-- Store Sales Forecasting -->
+                    <div class="cv-card" onclick="openModal('store')">
+                        <div>
+                            <span class="card-tag">Machine Learning</span>
+                            <div class="card-title">Store Sales Forecasting</div>
+                            <div class="card-subtitle">Time-Series · XGBoost · Python</div>
+                            <p class="card-desc">Demand forecasting across 54 store locations for Corporación Favorita
+                                using gradient-boosted trees and advanced feature engineering.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">2024</span>
+                            <span class="card-cta">Read more →</span>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Website -->
+                    <div class="cv-card" onclick="openModal('website')">
+                        <div>
+                            <span class="card-tag">Web Dev · Design</span>
+                            <div class="card-title">This Portfolio</div>
+                            <div class="card-subtitle">Figma · HTML/CSS/JS · AI-Native Build</div>
+                            <p class="card-desc">From a blank Figma canvas to a live, AI-powered portfolio — a story
+                                about design thinking, colour theory, and vibe coding.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">2025 – Present</span>
+                            <span class="card-cta">Read more →</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ═══════════ WORK EXPERIENCE ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Work Experience</span></div>
+                <div class="cards-grid single">
+
+                    <div class="cv-card" onclick="openModal('school')" style="min-height:160px;">
+                        <div>
+                            <span class="card-tag">Operations · Education</span>
+                            <div class="card-title">Assistant Manager</div>
+                            <div class="card-subtitle">Unnao, Uttar Pradesh, India</div>
+                            <p class="card-desc">Led daily school operations, taught Mathematics and Physics, and
+                                implemented a data-driven fee recovery strategy that reduced payment defaults by 300k
+                                INR.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Jul 2023 – Jun 2025</span>
+                            <span class="card-cta">Read more →</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ═══════════ ACHIEVEMENTS ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Achievements &amp; Certifications</span></div>
+                <div class="cards-grid triple">
+
+                    <!-- TOSA -->
+                    <div class="achievement-card clickable" onclick="openModal('tosa')">
+                        <div class="achievement-score">876</div>
+                        <div class="achievement-score-label">out of 1000</div>
+                        <div class="achievement-name">TOSA Excel 365</div>
+                        <div class="achievement-date">December 2025</div>
+                        <span class="cert-badge available">📄 Certificate Available</span>
+                    </div>
+
+                    <!-- GMAT -->
+                    <div class="achievement-card clickable" onclick="openModal('gmat')">
+                        <div class="achievement-score">615</div>
+                        <div class="achievement-score-label">680 Classic equivalent</div>
+                        <div class="achievement-name">GMAT Focus Edition</div>
+                        <div class="achievement-date">September 2024</div>
+                    </div>
+
+                    <!-- JEE -->
+                    <div class="achievement-card">
+                        <div class="achievement-score">97<span style="font-size:1.4rem">th</span></div>
+                        <div class="achievement-score-label">percentile</div>
+                        <div class="achievement-name">JEE Mains</div>
+                        <div class="achievement-date">January 2019</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ═══════════ SKILLS ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Technical Skills</span></div>
+
+                <div class="skills-grid">
+                    <!-- Python -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                            alt="Python">
+                        <span class="skill-name">Python</span>
+                    </div>
+                    <!-- NumPy -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg"
+                            alt="NumPy">
+                        <span class="skill-name">NumPy</span>
+                    </div>
+                    <!-- Pandas -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg"
+                            alt="Pandas">
+                        <span class="skill-name">Pandas</span>
+                    </div>
+                    <!-- MySQL -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
+                            alt="MySQL">
+                        <span class="skill-name">MySQL</span>
+                    </div>
+                    <!-- Figma -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
+                            alt="Figma">
+                        <span class="skill-name">Figma</span>
+                    </div>
+                    <!-- JavaScript -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+                            alt="JavaScript">
+                        <span class="skill-name">JavaScript</span>
+                    </div>
+                    <!-- HTML -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
+                            alt="HTML5">
+                        <span class="skill-name">HTML5</span>
+                    </div>
+                    <!-- CSS -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"
+                            alt="CSS3">
+                        <span class="skill-name">CSS3</span>
+                    </div>
+                    <!-- MS Office -->
+                    <div class="skill-item">
+                        <div class="skill-icon-custom"
+                            style="background:#D83B01;color:#fff;font-size:1.1rem;font-weight:800;">W</div>
+                        <span class="skill-name">MS Office</span>
+                    </div>
+                    <!-- SolidWorks -->
+                    <div class="skill-item">
+                        <div class="skill-icon-custom"
+                            style="background:#E50914;color:#fff;font-size:0.65rem;font-weight:700;border-radius:8px;">
+                            SW</div>
+                        <span class="skill-name">SolidWorks</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 8px; margin-bottom: 16px;">
+                    <p
+                        style="font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);font-weight:600;margin-bottom:14px;">
+                        Methodologies</p>
+                    <div class="method-pills">
+                        <span class="method-pill">Design Thinking</span>
+                        <span class="method-pill">Problem Solving</span>
+                        <span class="method-pill">Vibe Coding</span>
+                        <span class="method-pill">Web Development</span>
+                        <span class="method-pill">Data Analysis</span>
+                        <span class="method-pill">Financial Modelling</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════ LANGUAGES ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Languages</span></div>
+                <div class="lang-grid">
+                    <div class="lang-item">
+                        <div class="lang-name">English</div>
+                        <div class="lang-level">Fluent / Professional</div>
+                        <div class="lang-bar">
+                            <div class="lang-bar-fill" style="width:95%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-item">
+                        <div class="lang-name">Hindi</div>
+                        <div class="lang-level">Native</div>
+                        <div class="lang-bar">
+                            <div class="lang-bar-fill" style="width:100%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-item">
+                        <div class="lang-name">French</div>
+                        <div class="lang-level">A1 — Beginner</div>
+                        <div class="lang-bar">
+                            <div class="lang-bar-fill" style="width:18%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════ EXTRACURRICULAR ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Extracurricular</span></div>
+                <div class="extra-list">
+                    <div class="extra-item">
+                        <div class="extra-icon">✈️</div>
+                        <div>
+                            <div class="extra-role">Vice-President — Udaan Technical Club</div>
+                            <div class="extra-org">NIT Rourkela · Jul 2021 – Jun 2022</div>
+                            <ul class="extra-points">
+                                <li>Led a 40-member team designing RC planes, drones, and rockets using SolidWorks,
+                                    Ansys, OpenRocket, and Burnsim — growing membership from 30 to 70+.</li>
+                                <li>Introduced 3D printing to the club's workflow, enabling aircraft parts with 80% cost
+                                    savings in production scope.</li>
+                                <li>Organised "Innovision," NIT Rourkela's tech fest RC plane competition, with 100+
+                                    attendees.</li>
+                                <li>Collaborated with IIT Bhubaneswar's aeromodelling club on joint knowledge-sharing
+                                    projects.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="extra-item">
+                        <div class="extra-icon">🌱</div>
+                        <div>
+                            <div class="extra-role">Volunteer — Bharat Vikash Parishad</div>
+                            <div class="extra-org">Unnao, Uttar Pradesh · Sep 2023 – Present</div>
+                            <ul class="extra-points">
+                                <li>Participated in a plantation drive resulting in 1000+ trees planted.</li>
+                                <li>Implemented waste management initiatives, raising community awareness on segregation
+                                    and recycling.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- /about-page -->
+    </main>
+
+    <!-- ═══════════════════════════════════════════
+         MODAL OVERLAY
+    ═══════════════════════════════════════════ -->
+    <div class="cv-modal-overlay" id="cv-modal-overlay" onclick="handleOverlayClick(event)">
+        <div class="cv-modal" id="cv-modal">
+            <button class="cv-modal-close" onclick="closeModal()">×</button>
+            <div id="cv-modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // ── Modal Content Definitions ───────────────────────────────────────
+        const modalContent = {
+
+            blendfast: `
+                <div class="cv-modal-tag">Academic Project · EmLyon PCE</div>
+                <h2>BlendFast</h2>
+                <div class="modal-meta">
+                    <span>📍 Lyon, France</span>
+                    <span>📅 Sep – Dec 2025</span>
+                    <span>🏫 EmLyon Business School</span>
+                </div>
+                <div class="modal-divider"></div>
+                <p class="modal-section-title">The Problem</p>
+                <p>Workplace nutrition in France is broken. Most office workers either skip lunch, rely on vending machines, or spend 45 minutes in queues at nearby brasseries. The gap between convenience and health is real — and quantifiable.</p>
+                <p class="modal-section-title">What We Built</p>
+                <p>BlendFast is a B2B2C marketplace designed to bridge this gap. The model revolves around smart, connected fridges placed inside office buildings — preloaded with fresh, locally sourced healthy meals. No kitchen. No queue. No compromise.</p>
+                <div class="modal-highlight-box">
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+                        <div><div class="stat">92</div><div class="stat-desc">Qualified leads generated via pilot testing in Lyon</div></div>
+                        <div><div class="stat">100%</div><div class="stat-desc">Gap identified in healthy workplace food options</div></div>
+                        <div><div class="stat">15</div><div class="stat-desc">Locations secured at zero fixed rental cost</div></div>
+                    </div>
+                </div>
+                <p class="modal-section-title">The Model</p>
+                <p>Our revenue-sharing structure meant we approached building owners as partners, not tenants. The fridge provided visibility and convenience; we provided inventory and logistics. Zero upfront cost for the location partner made acquisition frictionless.</p>
+                <p>Distribution was the real moat — not the product. By securing locations via a "Plug-and-Play" smart fridge model, BlendFast created a scalable network that could expand across Lyon's office ecosystem without proportional cost growth.</p>
+            `,
+
+            store: `
+                <div class="cv-modal-tag">Machine Learning · Time-Series</div>
+                <h2>Store Sales Forecasting</h2>
+                <div class="modal-meta">
+                    <span>📍 Corporación Favorita, Ecuador</span>
+                    <span>📅 2024</span>
+                    <span>🛠️ Python · XGBoost · Pandas</span>
+                </div>
+                <div class="modal-divider"></div>
+                <p class="modal-section-title">Goal</p>
+                <p>Forecast daily sales across 54 store locations to maximise supply chain efficiency for Corporación Favorita, a major Ecuadorian retailer. This Time-Series challenge involves predicting demand for thousands of product families by integrating multiple external variables.</p>
+                <p class="modal-section-title">Technical Methodology</p>
+                <ul>
+                    <li><strong>Data Integration:</strong> Used Pandas left-joins to merge the primary transaction ledger with secondary datasets (holidays, stores, and oil prices), ensuring data integrity across temporal and geographical keys.</li>
+                    <li><strong>Feature Engineering:</strong> Created "Temporal Features" to capture behavioural patterns — including Lag Features and a Payday Effect encoding to account for autocorrelation in retail sales.</li>
+                    <li><strong>Missing Value Strategy:</strong> Applied forward-fill imputation for the Oil Price index, bridging the gap between the 5-day stock market cycle and the 7-day retail cycle to prevent data leaks.</li>
+                </ul>
+                <p class="modal-section-title">Model &amp; Validation</p>
+                <p>Used gradient-boosted decision trees (XGBoost) to capture non-linear relationships between economic changes and consumer spending. Validated with a Time-Series Split to ensure the model learned genuine predictive patterns rather than memorising historical noise.</p>
+                <p class="modal-section-title">Business Impact</p>
+                <p>The finished model delivers a data-driven inventory management framework — reducing stockouts and waste. The analysis pinpoints the precise effect of oil price volatility on purchasing power, providing actionable insights for strategic planning in emerging markets.</p>
+            `,
+
+            website: `
+                <div class="cv-modal-tag">Web Development · Design</div>
+                <h2>Building This Portfolio</h2>
+                <div class="modal-meta">
+                    <span>📍 Lyon, France</span>
+                    <span>📅 2025 – Present</span>
+                    <span>🛠️ Figma · HTML/CSS/JS · Node.js · OpenAI</span>
+                </div>
+                <div class="modal-divider"></div>
+                <p class="modal-section-title">Where It Started</p>
+                <p>Every portfolio has a first commit. Mine started not with code, but with a blank Figma canvas and a question: what does an "AI-native" professional actually look like online? Not a template. Not a LinkedIn export. Something that felt like a point of view.</p>
+                <p class="modal-section-title">Design First</p>
+                <p>Four years of Industrial Design at NIT Rourkela gave me a working vocabulary for aesthetics — colour theory, visual hierarchy, grid systems, and the quiet power of negative space. I designed the logo in Figma from scratch, studied dark-mode design palettes, and settled on a palette anchored by #222222 and a single accent red (#E50914) — inspired by the restraint of editorial design.</p>
+                <p>Typography was Inter for body and Playfair Display for editorial moments — a pairing that balances technical precision with human warmth.</p>
+                <p class="modal-section-title">Building with AI</p>
+                <p>The code was written in genuine collaboration with AI models. Not copy-paste engineering — but iterative, intent-driven development: describe a behaviour, review the output, refine, test, and repeat. This is what I call Vibe Coding: you provide the creative direction, the AI provides the execution velocity.</p>
+                <p class="modal-section-title">Content &amp; Storytelling</p>
+                <p>Every word on this site was written with intention. The project descriptions, the about text, the chatbox persona — all of it was drafted, refined, and edited to reflect a consistent voice: direct, curious, and unpretentious. Writing content for a personal website forces clarity about who you are and what you want people to understand about you.</p>
+                <p class="modal-section-title">The Backend</p>
+                <p>The AI chatbox (Shrey) runs on a secure Node.js + Express backend, with the OpenAI API key stored server-side in a .env file, rate-limited to prevent quota abuse, and protected by Helmet security headers. The contact form uses Formspree for reliable delivery. The whole thing runs on localhost — deployable to any cloud provider with a single command.</p>
+            `,
+
+            school: `
+                <div class="cv-modal-tag">Work Experience · Education</div>
+                <h2>Assistant Manager</h2>
+                <div class="modal-meta">
+                    <span>📍 Unnao, Uttar Pradesh, India</span>
+                    <span>📅 July 2023 – June 2025</span>
+                </div>
+                <div class="modal-divider"></div>
+                <p class="modal-section-title">Role Overview</p>
+                <p>After graduating from NIT Rourkela, I took on a dual role at a school in Unnao — part administrator, part educator, and part data analyst. It was a grounding experience that sharpened skills that no classroom had taught me: managing people, reading financial patterns, and communicating complex ideas to different audiences.</p>
+                <p class="modal-section-title">Operations &amp; Teaching</p>
+                <p>I managed daily school administration and events while simultaneously teaching Mathematics and Physics. Keeping academic standards up while handling the operational side of a school — scheduling, staffing, parent communication — required a kind of structured thinking that's hard to simulate in a case study.</p>
+                <p class="modal-section-title">Financial Data Analysis</p>
+                <p>One of the most impactful contributions was analysing fee payment patterns across the student body. By identifying high-risk groups early — families with irregular payment histories, seasonal income drops, or multiple fee defaults — I developed a proactive parent-teacher communication strategy.</p>
+                <div class="modal-highlight-box">
+                    <div class="stat">₹300k</div>
+                    <div class="stat-desc">Reduction in outstanding fee defaults through data-driven intervention</div>
+                </div>
+                <p>This work bridged two worlds I care about: using data to understand human behaviour, and translating that understanding into real institutional change. More details and specific outcomes will be added here soon.</p>
+            `,
+
+            tosa: `
+                <div class="cv-modal-tag">Certification · Microsoft Excel</div>
+                <h2>TOSA Excel 365</h2>
+                <div class="modal-meta">
+                    <span>📅 December 2025</span>
+                    <span>🏆 Score: 876 / 1000</span>
+                </div>
+                <div class="modal-divider"></div>
+                <div class="modal-highlight-box" style="text-align:center;">
+                    <div class="stat">876</div>
+                    <div class="stat-desc" style="margin-top:6px;">out of 1000 — Expert Level</div>
+                </div>
+                <p>The TOSA (Test On Software Applications) Excel 365 certification is a globally recognised benchmark for spreadsheet proficiency. A score of 876 places in the Expert tier, covering advanced functions, data modelling, pivot tables, and automation with macros.</p>
+                <p>Excel is the universal language of business analysis. This certification formalises a skill I use daily — from fee default analysis at the school in Unnao to financial modelling in strategy courses at EmLyon.</p>
+                <img src="Tosa.png" alt="TOSA Excel 365 Certificate" style="width:100%;border-radius:10px;margin-top:16px;border:1px solid rgba(255,255,255,0.08);">
+            `,
+
+            gmat: `
+                <div class="cv-modal-tag">Standardised Test · Business School</div>
+                <h2>GMAT Focus Edition</h2>
+                <div class="modal-meta">
+                    <span>📅 September 2024</span>
+                    <span>🏆 615 Focus (≈ 680 Classic)</span>
+                </div>
+                <div class="modal-divider"></div>
+                <div class="modal-highlight-box" style="text-align:center;">
+                    <div class="stat">615</div>
+                    <div class="stat-desc" style="margin-top:6px;">GMAT Focus Edition · Equivalent to 680 on Classic scale</div>
+                </div>
+                <p>The GMAT is the global benchmark for business school readiness, testing quantitative reasoning, verbal ability, and data sufficiency. The Focus Edition, introduced in 2023, places greater emphasis on data literacy and logical reasoning — areas I had actively developed through data analysis work and academic training.</p>
+                <p>A score of 615 on the Focus edition corresponds to approximately 680 on the Classic scale, which placed within competitive range for top European MiM programmes — including EmLyon, where I was subsequently accepted with a CGPA of 4/4.</p>
+                <p style="color:var(--text-muted);font-size:0.85rem;">📄 Certificate will be attached here shortly.</p>
+            `
+        };
+
+        // ── Modal Logic ─────────────────────────────────────────────────────
+        function openModal(key) {
+            const content = modalContent[key];
+            if (!content) return;
+            document.getElementById('cv-modal-body').innerHTML = content;
+            const overlay = document.getElementById('cv-modal-overlay');
+            overlay.style.display = 'flex';
+            requestAnimationFrame(() => overlay.classList.add('show'));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('cv-modal-overlay');
+            overlay.classList.remove('show');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('cv-modal-overlay')) closeModal();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+
+</body>
+
+</html>

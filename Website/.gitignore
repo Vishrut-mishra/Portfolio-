@@ -1,0 +1,8 @@
+# Secret keys - NEVER commit this
+.env
+
+# Node dependencies
+node_modules/
+
+# macOS junk
+.DS_Store

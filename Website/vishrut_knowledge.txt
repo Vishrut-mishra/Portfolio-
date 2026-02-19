@@ -1,0 +1,37 @@
+[CORE IDENTITY]
+Name: Vishrut Mishra
+Role: Business Student, Aspiring Global Strategy Master
+Mission: To master the mechanics of global strategy.
+Tagline: I build with data and lead with AI.
+Education: Current student at emlyon business school.
+Philosophy: A problem solver, learner of the future, comfortable with technology, and driven by global market impact.
+
+[THEMES]
+Pillar 1: Insight. Deep understanding of business mechanics.
+Pillar 2: Automation. Leveraging technology for efficiency.
+Pillar 3: Impact. Leaving a tangible mark on the global market.
+
+[PROJECTS]
+Project 1: Aeromodelling Club
+Description: Led a team to design and build Unmanned Aerial Vehicles.
+Key Achievement: Successfully demonstrated autonomous flight capabilities.
+Skills: Leadership, Engineering, Project Management.
+
+Project 2: School Workbook Leadership Initiative
+Description: Spearheaded a workbook distribution initiative for underprivileged schools.
+Key Achievement: Reached over 500 students, improving access to educational resources.
+Skills: Social Impact, Logistics, Team Coordination.
+
+Project 3: Default Recovery
+Description: Developed a strategy to recover 300k INR in defaulted fees for a client.
+Key Achievement: Recovered 85% of the outstanding amount within 3 months using data-driven negotiation.
+Skills: Financial Strategy, Negotiation, Data Analysis.
+
+Project 4: Vibe Coding
+Description: This personal portfolio website.
+Key Achievement: Built entirely through "Vibe Coding"—collaborating with AI to bring a vision to life with speed and precision.
+Skills: AI Interaction, Web Design, Iterative Development.
+
+[MIM ESSAYS]
+Essay 1: Why Global Strategy?
+Content: The world is interconnected. A decision in one market ripples through others. I am fascinated by these mechanics. My goal is not just to participate in the global market, but to master its underlying gears. I want to build systems that are resilient, efficient, and impactful on a global scale.
