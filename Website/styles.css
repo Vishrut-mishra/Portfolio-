@@ -819,13 +819,16 @@ main {
 /* Modal Content Box */
 .modal-content {
     background-color: #1a1a1a;
-    width: 90%;
-    max-width: 1200px;
+    width: 88%;
+    max-width: 820px;
+    max-height: 82vh;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transform: scale(0.9);
     transition: transform 0.3s ease;
 }
@@ -850,18 +853,18 @@ main {
     color: #fff;
 }
 
-/* Modal Body Layout */
+/* Blog sidebar layout (Prisoners card) */
+.modal-body.blog-layout {
+    flex-direction: row;
+    height: 100%;
+    overflow: hidden;
+}
+
 .modal-body {
     display: flex;
     flex-direction: column;
-    /* Default stack */
-}
-
-/* 1/3 Image Split Layout for Blog */
-.modal-body.blog-layout {
-    flex-direction: row;
-    height: 80vh;
-    /* Fixed height for split view */
+    flex: 1;
+    overflow: hidden;
 }
 
 .modal-image-container {
@@ -885,23 +888,23 @@ main {
 }
 
 .modal-text-container {
-    padding: 40px;
+    padding: 32px 36px;
     flex: 2;
     overflow-y: auto;
+    height: 100%;
 }
 
 #modal-title {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    margin: 10px 0 20px 0;
+    font-size: 1.8rem;
+    margin: 8px 0 16px 0;
 }
 
 #modal-description {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 0.95rem;
+    line-height: 1.75;
     color: #ccc;
-    white-space: pre-wrap;
-    /* Preserve formatting */
+    /* white-space handled by innerHTML paragraph tags */
 }
 
 /* Responsive Modal */

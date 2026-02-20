@@ -255,39 +255,43 @@ The trajectory they built hasn't come down since. The club is still growing — 
             modalImg.src = '';
 
             if (dataType === 'blog') {
-                // Prisoners — keep sidebar layout, it suits a book cover
+                // Prisoners — book cover works great as a sidebar
                 modalBody.classList.add('blog-layout');
                 modalImg.src = 'Prisoners.jpg';
                 modalDesc.innerText = prisonersText;
 
             } else if (dataType === 'ml') {
-                // Store Sales — top banner image, then text
+                // Store Sales — small right-floated chart thumbnail, text wraps
                 modalDesc.innerHTML = `
                     <img src="Store.png" alt="Store Sales"
-                         style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:20px;">
-                    ${renderText(storeSalesText)}`;
+                         style="float:right;width:42%;max-height:160px;object-fit:cover;
+                                border-radius:10px;margin:4px 0 16px 20px;box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+                    ${renderText(storeSalesText)}
+                    <div style="clear:both;"></div>`;
 
             } else if (dataType === 'recovery') {
-                // Assistant Manager — text only (300k data point is inside the text)
+                // Assistant Manager — text only
                 modalDesc.innerHTML = renderText(recoveryText);
 
             } else if (dataType === 'aero') {
-                // Aeromodelling — centered Udaan1.png with caption, then text
+                // Aeromodelling — Udaan1.png floats right, text wraps, caption below image
                 modalDesc.innerHTML = `
-                    <figure style="text-align:center;margin:0 0 24px;">
+                    <figure style="float:right;width:44%;margin:4px 0 16px 20px;text-align:center;">
                         <img src="Udaan1.png" alt="Custom-built RC Aircraft"
-                             style="max-width:65%;border-radius:12px;display:block;margin:0 auto 10px;">
-                        <figcaption style="font-size:0.78rem;color:#7B7B7B;font-style:italic;">
+                             style="width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+                        <figcaption style="font-size:0.72rem;color:#7B7B7B;font-style:italic;margin-top:6px;">
                             Project Showcase: Custom-built RC Aircraft
                         </figcaption>
                     </figure>
-                    ${renderText(aeroText)}`;
+                    ${renderText(aeroText)}
+                    <div style="clear:both;"></div>`;
 
             } else if (dataType === 'vibe') {
-                // Vibe Coding — small Vibe.jpeg thumbnail top-right, text wraps
+                // Vibe Coding — Vibe.jpeg thumbnail floats right
                 modalDesc.innerHTML = `
                     <img src="Vibe.jpeg" alt="Vibe Coding"
-                         style="float:right;width:38%;border-radius:12px;margin:0 0 16px 20px;">
+                         style="float:right;width:36%;border-radius:10px;margin:4px 0 16px 20px;
+                                box-shadow:0 4px 16px rgba(0,0,0,0.4);">
                     ${renderText(vibeText)}
                     <div style="clear:both;"></div>`;
 
