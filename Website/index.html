@@ -18,13 +18,17 @@
 
     <header class="main-header">
         <img src="logo.png" alt="VM Logo" class="logo-img">
-        <nav class="pill-nav">
+        <nav class="pill-nav" id="main-nav">
             <a href="about.html">About</a>
             <a href="#work">Work</a>
             <a href="#blog">Blog</a>
+            <a href="contact.html">Contact</a>
             <a href="#ai-chatbox" id="nav-chat-trigger">AI Chatbox</a>
         </nav>
         <a href="contact.html" class="contact-btn">Contact</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
     </header>
 
     <main>
@@ -142,6 +146,22 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const mainNav = document.getElementById('main-nav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mainNav.classList.toggle('mobile-open');
+        });
+        // Close nav when a link is clicked
+        mainNav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mainNav.classList.remove('mobile-open');
+            });
+        });
+    </script>
 </body>
 
 </html>

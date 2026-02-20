@@ -1,0 +1,14 @@
+[dotenv@17.3.1] injecting env (2) from .env -- tip: 🛡️ auth for agents: https://vestauth.com
+
+✅  VM AI Chatbox server → http://localhost:3000
+🔒  API key loaded from .env
+🛡️  Rate limit: 20 requests / 15 min per IP
+🪖  Helmet security headers active
+
+[dotenv@17.3.1] injecting env (2) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+✅  VM AI Chatbox server → http://localhost:3000
+🔒  API key loaded from .env
+🛡️  Rate limit: 20 requests / 15 min per IP
+🪖  Helmet security headers active
+

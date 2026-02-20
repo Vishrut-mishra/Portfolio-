@@ -501,10 +501,11 @@
             color: var(--text-muted);
         }
 
+        /* ── Language bars ── */
         .lang-bar {
-            height: 3px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.08);
-            border-radius: 2px;
+            border-radius: 4px;
             margin-top: 10px;
             overflow: hidden;
         }
@@ -512,7 +513,38 @@
         .lang-bar-fill {
             height: 100%;
             background: var(--accent);
-            border-radius: 2px;
+            border-radius: 4px;
+        }
+
+        /* ── Hobbies ── */
+        .hobbies-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .hobby-pill {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 40px;
+            padding: 12px 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-body);
+            font-weight: 500;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .hobby-pill:hover {
+            border-color: rgba(229, 9, 20, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .hobby-icon {
+            font-size: 1.2rem;
+            line-height: 1;
         }
 
         /* ── Extracurricular ── */
@@ -770,6 +802,84 @@
             .cv-modal {
                 padding: 28px 20px;
             }
+
+            /* Additional mobile fixes for about page */
+            .about-page {
+                padding: 110px 20px 60px;
+            }
+
+            .about-hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                padding-bottom: 40px;
+            }
+
+            .hero-avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .stat-pills {
+                justify-content: center;
+            }
+
+            .edu-card {
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+            }
+
+            .edu-right {
+                text-align: left;
+                padding-left: 0;
+            }
+
+            .cards-grid,
+            .cards-grid.double,
+            .cards-grid.triple {
+                grid-template-columns: 1fr;
+            }
+
+            .cv-card {
+                min-height: 160px;
+                padding: 22px;
+            }
+
+            .lang-grid {
+                flex-direction: column;
+            }
+
+            .lang-item {
+                min-width: unset;
+            }
+
+            /* Modal slides up from bottom on mobile */
+            .cv-modal-overlay {
+                align-items: flex-end;
+            }
+
+            .cv-modal {
+                width: 100% !important;
+                max-height: 90vh;
+                border-radius: 20px 20px 0 0 !important;
+                overflow-y: auto;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-label span {
+                font-size: 0.65rem;
+                letter-spacing: 2px;
+            }
         }
     </style>
 </head>
@@ -780,13 +890,16 @@
     <!-- ── Header ── -->
     <header class="main-header">
         <a href="index.html"><img src="logo.png" alt="VM Logo" class="logo-img"></a>
-        <nav class="pill-nav">
+        <nav class="pill-nav" id="main-nav">
             <a href="index.html#work">Work</a>
             <a href="about.html">About</a>
             <a href="index.html#blog">Blog</a>
             <a href="index.html#ai-chatbox">AI Chatbox</a>
         </nav>
         <a href="contact.html" class="contact-btn">Contact</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
     </header>
 
     <main>
@@ -1108,6 +1221,29 @@
                 </div>
             </section>
 
+            <!-- ═══════════ HOBBIES ═══════════ -->
+            <section class="cv-section">
+                <div class="section-label"><span>Hobbies</span></div>
+                <div class="hobbies-grid">
+                    <div class="hobby-pill">
+                        <span class="hobby-icon">🏸</span>
+                        <span>Badminton</span>
+                    </div>
+                    <div class="hobby-pill">
+                        <span class="hobby-icon">🥾</span>
+                        <span>Trekking</span>
+                    </div>
+                    <div class="hobby-pill">
+                        <span class="hobby-icon">🚴</span>
+                        <span>Cycling</span>
+                    </div>
+                    <div class="hobby-pill">
+                        <span class="hobby-icon">🌍</span>
+                        <span>Geopolitics</span>
+                    </div>
+                </div>
+            </section>
+
         </div><!-- /about-page -->
     </main>
 
@@ -1278,6 +1414,22 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
         });
+
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const mainNav = document.getElementById('main-nav');
+        if (hamburger && mainNav) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                mainNav.classList.toggle('mobile-open');
+            });
+            mainNav.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    mainNav.classList.remove('mobile-open');
+                });
+            });
+        }
     </script>
 
 </body>
