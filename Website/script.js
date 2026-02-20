@@ -152,8 +152,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalDesc = document.getElementById('modal-description');
 
     // Data for the specific blog post
-    const prisonersText = `"Reading Prisoners of Geography is like finally obtaining the schematic diagram for the world’s most complex machine. For a mind driven by the "how" and "why" of global systems, the experience feels less like reading a history book and more like a high-level diagnostic briefing on the fundamental engine of the global market. Coming from an engineering background, there is a profound intellectual satisfaction in seeing how physical constraints—mountains, rivers, and sea lanes—dictate the "flow" of power and trade with almost mathematical predictability. It feels empowering to look at a standard map and suddenly see the invisible walls and corridors that have guided human ambition for centuries. While my studies at emlyon focus on digital strategy, this book provides the heavy, physical anchor those markets sit upon. It validates my approach as an "AI-native" learner: I am not just studying subjects, I am decoding the physical mechanics of the 21st-century world."`;
-    const storeSalesText = `Store Sales Time Series Forecasting
+    const prisonersText = `"Reading Prisoners of Geography is like finally obtaining the schematic diagram for the world's most complex machine. For a mind driven by the "how" and "why" of global systems, the experience feels less like reading a history book and more like a high-level diagnostic briefing on the fundamental engine of the global market. Coming from an engineering background, there is a profound intellectual satisfaction in seeing how physical constraints—mountains, rivers, and sea lanes—dictate the "flow" of power and trade with almost mathematical predictability. It feels empowering to look at a standard map and suddenly see the invisible walls and corridors that have guided human ambition for centuries. While my studies at emlyon focus on digital strategy, this book provides the heavy, physical anchor those markets sit upon. It validates my approach as an "AI-native" learner: I am not just studying subjects, I am decoding the physical mechanics of the 21st-century world."`;
+
+    const vibeText = `Vibe Coding — Building This Portfolio
+
+To create this website, I went back to first principles. I revised everything I knew about design from my bachelors — colour theory, visual hierarchy, grid systems — and combined it with a hands-on crash course in web development: HTML, CSS, JavaScript, and Node.js.
+
+The Logo:
+Designed from scratch in Figma. I chose a dark palette anchored by #222222 with a single accent red (#E50914) — minimal, editorial, intentional.
+
+The AI Chatbox (Shrey):
+Built a secure backend with Node.js and the OpenAI API, protected by Helmet headers and rate-limiting. Trained Shrey to respond in a specific tone — professional with a dry wit when the conversation calls for it.
+
+Deployment & Security:
+Connected multiple platforms to make the site live and hardened against basic attacks — environment variables, gitignored keys, serverless functions on Vercel.
+
+The Bigger Lesson:
+This project confirmed something I strongly believe: in this changing world, the most valuable skill is knowing how to use the tools AI provides and making them collaborate with each other. The website is built to grow — new blogs, new projects, new experiences. It is a living document, not a static PDF.
+
+What I walked away with is not just a website. It is clarity on what is worth learning next.`;
+
+    const storeSalesText = `Store Sales Time Series Forecasting (2025)
 
 Goal: Forecast daily sales across 54 store locations to maximise supply chain efficiency for Corporación Favorita, a major Ecuadorian retailer. This Time-Series challenge involves predicting demand for thousands of product families by integrating multiple external variables.
 
@@ -172,42 +191,39 @@ Business Impact: The finished model delivers a data-driven inventory management 
     const recoveryText = `Default Recovery Strategy
 
 The Problem:
-Payment defaults in an educational institution are rarely about money alone — they are almost always a signal of disengagement. That was the insight that changed everything.
+Payment defaults in an educational institution are rarely about money alone — they are almost always a signal of disengagement.That was the insight that changed everything.
 
 The Analysis:
-Using Python and Excel, I mapped fee-payment patterns across the student body. The data revealed a counterintuitive finding: lower-income families with daily wage earners were often more consistent with payments than middle-class families with steady incomes. The defaults were not explained by income — they were explained by relationship.
+Using Python and Excel, I mapped fee - payment patterns across the student body.The data revealed a counterintuitive finding: lower - income families with daily wage earners were often more consistent with payments than middle - class families with steady incomes.The defaults were not explained by income — they were explained by relationship.
 
-Further analysis confirmed the hypothesis: families with weaker bonds to the school — fewer parent-teacher interactions, less visibility into their child's progress — were the ones most likely to delay or default. The school was a transaction to them, not a community.
+Further analysis confirmed the hypothesis: families with weaker bonds to the school — fewer parent - teacher interactions, less visibility into their child's progress — were the ones most likely to delay or default. The school was a transaction to them, not a community.
 
 The Intervention:
-I designed a targeted programme of structured parent-teacher interactions: scheduled mentoring sessions, personalised progress updates, and proactive outreach to high-risk families before defaults occurred rather than after.
+I designed a targeted programme of structured parent - teacher interactions: scheduled mentoring sessions, personalised progress updates, and proactive outreach to high - risk families before defaults occurred rather than after.
 
 The Outcome:
-Payment defaults dropped by approximately 15%, recovering around 300,000 INR in outstanding fees — without a single legal notice or punitive measure. The lever was engagement, not enforcement.
+Payment defaults dropped by approximately 15 %, recovering around 300,000 INR in outstanding fees — without a single legal notice or punitive measure.The lever was engagement, not enforcement.
 
 The Lesson:
-Data does not replace empathy — it directs it. The numbers told us where to look; the conversations did the rest. This experience is at the core of how I approach analytical work: not as a way to reduce people to data points, but as a way to understand them well enough to actually help.`;
+Data does not replace empathy — it directs it.The numbers told us where to look; the conversations did the rest.This experience is at the core of how I approach analytical work: not as a way to reduce people to data points, but as a way to understand them well enough to actually help.`;
 
-    const aeroText = `Vice-President, Udaan Technical Club — NIT Rourkela
+    const aeroText = `Vice - President, Udaan Technical Club — NIT Rourkela
 July 2021 – June 2022
 
-The Club:
-Udaan is NIT Rourkela's aeromodelling and rocketry club — a community of engineers who build things that fly. When I took over as President, the club had 30 active members and ambitions larger than its infrastructure.
+The Beginning:
+Udaan has been one of the most adorable experiences of Vishrut's life. He started as a member in 2019 when the club had fewer than 10 active members. They were new, enthusiastic, and figuring things out — until COVID hit.
 
-What We Built:
-Over the year, we designed and built RC planes, drones, and rockets using SolidWorks for CAD modelling, Ansys for structural simulation, OpenRocket for trajectory analysis, and Burnsim for motor selection. These were not just academic exercises — they were engineered to fly.
+Learning Through the Lockdown:
+They didn't stop. During COVID, Vishrut taught himself 3D printing and started making aircraft components and DIY planes at home. When they returned to campus, they came back stronger.
 
-Growing the Team:
-Membership grew from 30 to over 70 active members through a structured recruitment and mentorship programme. The challenge was not just attracting students — it was making technical knowledge feel accessible. We ran workshops, open build sessions, and peer-learning circles that turned passive spectators into active builders.
+    Competitions & Wins:
+The club went on to win aeromodelling competitions at IIT Kanpur and IIT BHU — two of India's most prestigious engineering institutions. They also organised RC plane events at NIT Rourkela's Innovision tech fest, drawing 100 + participants.
 
-3D Printing as a Force Multiplier:
-One of the most impactful decisions was introducing 3D printing to the club's manufacturing process. Aircraft components that previously required outsourcing or expensive machining could now be prototyped and iterated in-house. This expanded our project scope and cut production costs by approximately 80%, allowing us to pursue more ambitious designs.
+Leading the Club:
+Vishrut rose to Vice - President.By then, the club had grown from under 10 to over 30 active members.They introduced 3D printing to cut production costs by ~80 %, ran workshops, and established a knowledge - sharing partnership with IIT Bhubaneswar.
 
-Innovision:
-We organised an RC plane competition at NIT Rourkela's annual tech festival "Innovision," drawing over 100 participants and spectators. It was the club's largest public event and put aeromodelling on the map for students who had never considered it.
-
-Collaboration with IIT Bhubaneswar:
-We established a cross-institutional partnership with IIT Bhubaneswar's aeromodelling team for joint project collaboration and technical knowledge-sharing — one of the first such inter-NIT/IIT collaborations in the region.`;
+The Lasting Impact:
+The trajectory they built hasn't come down since. The club is still growing — bigger and more successful with time. Vishrut is proud of what they built together: not just planes, but a community.`;
 
     document.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('click', () => {
@@ -237,8 +253,12 @@ We established a cross-institutional partnership with IIT Bhubaneswar's aeromode
                 modalDesc.innerText = recoveryText;
             } else if (isAero) {
                 modalBody.classList.add('blog-layout');
-                modalImg.src = 'aeromodelling.jpg';
+                modalImg.src = 'Udaan1.png';
                 modalDesc.innerText = aeroText;
+            } else if (dataType === 'vibe') {
+                modalBody.classList.add('blog-layout');
+                modalImg.src = 'Vibe.jpeg';
+                modalDesc.innerText = vibeText;
             } else {
                 modalBody.classList.remove('blog-layout');
                 modalImg.src = '';

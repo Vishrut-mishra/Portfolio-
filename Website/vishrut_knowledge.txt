@@ -1,10 +1,22 @@
 [CORE IDENTITY]
 Name: Vishrut Mishra
-Role: Business Student, Aspiring Global Strategy Master
-Mission: To master the mechanics of global strategy.
+Age: 25
+Sex: Male
+Place of Birth: Unnao, India
+Primary Education: Patriot School, Unnao
+Current: Masters in Management student at emlyon business school, Lyon, France
 Tagline: I build with data and lead with AI.
-Education: Current student at emlyon business school.
+Mission: To master the mechanics of global strategy.
 Philosophy: A problem solver, learner of the future, comfortable with technology, and driven by global market impact.
+
+[PERSONAL INFO]
+Age: 25
+Sex: Male
+Hometown: Unnao, India
+School: Patriot School (primary education)
+University: NIT Rourkela (Engineering background)
+Current: emlyon business school, Lyon, France — Masters in Management (Global Strategy)
+Any undisclosed personal details (relationships, finances, etc.): Not allowed to disclose.
 
 [THEMES]
 Pillar 1: Insight. Deep understanding of business mechanics.
@@ -12,26 +24,56 @@ Pillar 2: Automation. Leveraging technology for efficiency.
 Pillar 3: Impact. Leaving a tangible mark on the global market.
 
 [PROJECTS]
-Project 1: Aeromodelling Club
-Description: Led a team to design and build Unmanned Aerial Vehicles.
-Key Achievement: Successfully demonstrated autonomous flight capabilities.
-Skills: Leadership, Engineering, Project Management.
+Project 1: Vibe Coding — This Portfolio Website
+To create this website, Vishrut revised all his design knowledge from his bachelors and learned the basics of coding and web development. He connected multiple platforms to deploy it and made sure it is safe from hackers. The website is built to constantly get updated — blogs being posted, new experiences and learning added over time. He created the logo on Figma and learned how to build and train an AI chatbox to respond better. He believes it is vital in this changing world to know how to use the tools AI provides and make them collaborate with each other to create impressive results. It was an amazing experience in which he learned a lot and gained some clarity on what is more important to learn.
+Skills: AI Interaction, Web Design, Figma, Node.js, Security, Iterative Development
 
-Project 2: School Workbook Leadership Initiative
-Description: Spearheaded a workbook distribution initiative for underprivileged schools.
-Key Achievement: Reached over 500 students, improving access to educational resources.
-Skills: Social Impact, Logistics, Team Coordination.
+Project 2: Udaan Aeromodelling Club — NIT Rourkela (Vice-President)
+Udaan has been one of the most adorable experiences of Vishrut's life. Working with students — seniors and juniors — taught him how to create a friendly environment that brings out everyone's creativity. He started as a member in 2019 when the club had fewer than 10 active members. They worked hard but were still finding their footing when COVID hit. They didn't stop learning — Vishrut learned 3D printing and made aircraft components and DIY planes at home. When they returned to college, the club won competitions at IIT Kanpur and IIT BHU, and organised many events within NIT Rourkela. Vishrut rose to lead the club as Vice-President; by then the club had grown to over 30 members. The trajectory they set hasn't come down since — the club is still growing, bigger and more successful with time. He is proud of what they built together.
+Skills: Leadership, 3D Printing, SolidWorks, Ansys, OpenRocket, Engineering, Team Building
 
-Project 3: Default Recovery
-Description: Developed a strategy to recover 300k INR in defaulted fees for a client.
-Key Achievement: Recovered 85% of the outstanding amount within 3 months using data-driven negotiation.
-Skills: Financial Strategy, Negotiation, Data Analysis.
+Project 3: BlendFast — Academic Project (PCE)
+BlendFast was an academic project completed at PCE. Full project details are available in the attached PDF document on the website — click the BlendFast card to access it.
 
-Project 4: Vibe Coding
-Description: This personal portfolio website.
-Key Achievement: Built entirely through "Vibe Coding"—collaborating with AI to bring a vision to life with speed and precision.
-Skills: AI Interaction, Web Design, Iterative Development.
+Project 4: Store Sales Time Series Forecasting (2025)
+Goal: Forecast daily sales across 54 store locations for Corporación Favorita (major Ecuadorian retailer). Used Pandas, XGBoost, feature engineering (lag features, payday effect), and time-series cross-validation. The model delivers a data-driven inventory management framework reducing stockouts and waste.
+Skills: Python, Pandas, XGBoost, Feature Engineering, Time-Series Analysis
 
-[MIM ESSAYS]
-Essay 1: Why Global Strategy?
-Content: The world is interconnected. A decision in one market ripples through others. I am fascinated by these mechanics. My goal is not just to participate in the global market, but to master its underlying gears. I want to build systems that are resilient, efficient, and impactful on a global scale.
+[WORK EXPERIENCE]
+Role: Assistant Manager
+Period: 2023 — after graduation from NIT Rourkela
+Organisation: Newly formed school (educational institution)
+
+After graduating in 2023, Vishrut joined a newly formed school as Assistant Manager, looking after daily operations, conducting events, and solving day-to-day challenges that come with building something from scratch.
+
+Alongside administration, he also taught Mathematics and Physics up to high school level. This was one of the most grounding experiences of his career — having to explain logic clearly to students who had no prior foundation forced him to become a much sharper communicator. He learned how to break down complex ideas into digestible steps, how to read a room, and how to adapt his approach depending on who he was talking to.
+
+In the middle of this role, he identified a growing problem: payment defaults were rising. Rather than treating it as a financial issue, he approached it as a data problem. Using Python and Excel, he mapped fee-payment patterns across the student body and discovered a counterintuitive insight — defaults correlated with weak family-school relationships, not income. Families that felt disconnected from the school's community were the ones most likely to default. He designed a targeted programme of structured parent-teacher interactions and proactive outreach to high-risk families. The result: defaults dropped by approximately 15%, recovering around 300,000 INR — without a single legal notice.
+
+Looking ahead, the skills Vishrut built in this role — clear communication, data-driven decision making, working under ambiguity, and leading without authority — are directly transferable to a career in global strategy and management consulting. He plans to use these to design more resilient systems at a global scale, where the stakes are higher and the complexity even more interesting.
+
+Skills: Operations Management, Teaching, Data Analysis, Python, Excel, Communication, Leadership
+
+[ACHIEVEMENTS]
+Achievement 1: TOSA Digital — Advanced Level certification in digital tools
+Achievement 2: GMAT — Standardised management aptitude test
+Achievement 3: JEE — Qualified the Joint Entrance Examination for engineering admissions in India
+Achievement 4: Won aeromodelling competitions at IIT Kanpur and IIT BHU with Udaan Club
+
+[SKILLS]
+Technical: Python, NumPy, Pandas, Scikit-learn, XGBoost, SQL, Figma, Node.js, HTML, CSS, Git
+Business: Global Strategy, Data Analysis, Financial Modelling, Supply Chain, Negotiation
+Methodologies: Agile, Design Thinking, Time-Series Analysis, Feature Engineering, AI Prompting
+
+[LANGUAGES]
+English: Fluent (Professional)
+French: Intermediate (Living in Lyon, France)
+Hindi: Native
+
+[EXTRACURRICULAR]
+Udaan Aeromodelling Club: Vice-President, NIT Rourkela (2021–2022)
+Teaching: Taught Math & Physics at high school level (2023)
+Reading: Avid reader — "Prisoners of Geography" by Tim Marshall is a recent favourite
+
+[BOOKS / BLOG]
+Prisoners of Geography by Tim Marshall: "Reading Prisoners of Geography is like finally obtaining the schematic diagram for the world's most complex machine. For a mind driven by the 'how' and 'why' of global systems, the experience feels less like reading a history book and more like a high-level diagnostic briefing on the fundamental engine of the global market."
