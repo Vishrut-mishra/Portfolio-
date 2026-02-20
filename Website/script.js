@@ -261,13 +261,8 @@ The trajectory they built hasn't come down since. The club is still growing — 
                 modalDesc.innerText = prisonersText;
 
             } else if (dataType === 'ml') {
-                // Store Sales — small right-floated chart thumbnail, text wraps
-                modalDesc.innerHTML = `
-                    <img src="Store.png" alt="Store Sales"
-                         style="float:right;width:42%;max-height:160px;object-fit:cover;
-                                border-radius:10px;margin:4px 0 16px 20px;box-shadow:0 4px 16px rgba(0,0,0,0.4);">
-                    ${renderText(storeSalesText)}
-                    <div style="clear:both;"></div>`;
+                // Store Sales — text only
+                modalDesc.innerHTML = renderText(storeSalesText);
 
             } else if (dataType === 'recovery') {
                 // Assistant Manager — text only
@@ -287,13 +282,8 @@ The trajectory they built hasn't come down since. The club is still growing — 
                     <div style="clear:both;"></div>`;
 
             } else if (dataType === 'vibe') {
-                // Vibe Coding — Vibe.jpeg thumbnail floats right
-                modalDesc.innerHTML = `
-                    <img src="Vibe.jpeg" alt="Vibe Coding"
-                         style="float:right;width:36%;border-radius:10px;margin:4px 0 16px 20px;
-                                box-shadow:0 4px 16px rgba(0,0,0,0.4);">
-                    ${renderText(vibeText)}
-                    <div style="clear:both;"></div>`;
+                // Vibe Coding — text only
+                modalDesc.innerHTML = renderText(vibeText);
 
             } else {
                 modalDesc.innerHTML = '';
