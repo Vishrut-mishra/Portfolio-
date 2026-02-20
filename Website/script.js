@@ -156,21 +156,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const vibeText = `Vibe Coding — Building This Portfolio
 
-To create this website, I went back to first principles. I revised everything I knew about design from my bachelors — colour theory, visual hierarchy, grid systems — and combined it with a hands-on crash course in web development: HTML, CSS, JavaScript, and Node.js.
+Vibe Coding is not about writing code from scratch. It is about knowing what to build, why it matters, and directing AI to build it well.
 
-The Logo:
-Designed from scratch in Figma. I chose a dark palette anchored by #222222 with a single accent red (#E50914) — minimal, editorial, intentional.
+My Industrial Design background from NIT Rourkela gave me the foundation: visual hierarchy, colour theory, grid systems, and user-centred thinking. I brought that as the creative director — deciding what the site should feel like and how each section should communicate.
 
-The AI Chatbox (Shrey):
-Built a secure backend with Node.js and the OpenAI API, protected by Helmet headers and rate-limiting. Trained Shrey to respond in a specific tone — professional with a dry wit when the conversation calls for it.
+File Structure & Architecture:
+Understood how a web project is organised — how modules connect, how static and dynamic files relate, and how a Node.js backend serves frontend assets.
 
-Deployment & Security:
-Connected multiple platforms to make the site live and hardened against basic attacks — environment variables, gitignored keys, serverless functions on Vercel.
+GitHub Synchronisation:
+Learned version control through consistent commits — staging changes, pushing to remote, and maintaining a clean project history.
 
-The Bigger Lesson:
-This project confirmed something I strongly believe: in this changing world, the most valuable skill is knowing how to use the tools AI provides and making them collaborate with each other. The website is built to grow — new blogs, new projects, new experiences. It is a living document, not a static PDF.
+Vercel Deployment:
+Connected the GitHub repository to Vercel for automated deployment. Configured environment variables, serverless functions (api/chat.js), and routing so the live site matches local development.
 
-What I walked away with is not just a website. It is clarity on what is worth learning next.`;
+AI Chatbox (Shrey):
+Directed the build of a secure backend using Node.js and the OpenAI API — protected by Helmet headers, rate-limited, and trained via a custom knowledge base.
+
+The Logo & Design:
+Created in Figma using four years of Industrial Design training as the foundation — minimal, editorial, intentional.
+
+The Lesson:
+The most valuable skill is not syntax. It is knowing what to build and guiding AI to build it well. That is Vibe Coding.`;
 
     const storeSalesText = `Store Sales Time Series Forecasting (2025)
 
@@ -225,49 +231,75 @@ Vishrut rose to Vice - President.By then, the club had grown from under 10 to ov
 The Lasting Impact:
 The trajectory they built hasn't come down since. The club is still growing — bigger and more successful with time. Vishrut is proud of what they built together: not just planes, but a community.`;
 
+    // ── Helper: render text with section headings bold ────────────────────
+    function renderText(text) {
+        return text.split('\n').map(line => {
+            if (line.match(/^[A-Z][^a-z]*:$/) || line.match(/^[A-Z].+:$/)) {
+                return `<p style="font-weight:700;color:#f8f8f8;margin:16px 0 4px;">${line}</p>`;
+            }
+            return line === '' ? '<br>' : `<p style="margin:0 0 6px;color:#ccc;font-size:1rem;line-height:1.7;">${line}</p>`;
+        }).join('');
+    }
+
     document.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('click', () => {
             const dataType = card.getAttribute('data-type');
-            const isBlog = dataType === 'blog';
-            const isML = dataType === 'ml';
-            const isRecovery = dataType === 'recovery';
-            const isAero = dataType === 'aero';
             const title = card.querySelector('.project-title').innerText;
             const category = card.querySelector('.project-category').innerText;
 
-            // Set Content
             modalTitle.innerText = title;
             modalCategory.innerText = category;
 
-            if (isBlog) {
+            // Always clean up layout first
+            modalBody.classList.remove('blog-layout');
+            modalImg.src = '';
+
+            if (dataType === 'blog') {
+                // Prisoners — keep sidebar layout, it suits a book cover
                 modalBody.classList.add('blog-layout');
                 modalImg.src = 'Prisoners.jpg';
                 modalDesc.innerText = prisonersText;
-            } else if (isML) {
-                modalBody.classList.add('blog-layout');
-                modalImg.src = 'Store.png';
-                modalDesc.innerText = storeSalesText;
-            } else if (isRecovery) {
-                modalBody.classList.add('blog-layout');
-                modalImg.src = 'data.jpeg';
-                modalDesc.innerText = recoveryText;
-            } else if (isAero) {
-                modalBody.classList.add('blog-layout');
-                modalImg.src = 'Udaan1.png';
-                modalDesc.innerText = aeroText;
+
+            } else if (dataType === 'ml') {
+                // Store Sales — top banner image, then text
+                modalDesc.innerHTML = `
+                    <img src="Store.png" alt="Store Sales"
+                         style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:20px;">
+                    ${renderText(storeSalesText)}`;
+
+            } else if (dataType === 'recovery') {
+                // Assistant Manager — text only (300k data point is inside the text)
+                modalDesc.innerHTML = renderText(recoveryText);
+
+            } else if (dataType === 'aero') {
+                // Aeromodelling — centered Udaan1.png with caption, then text
+                modalDesc.innerHTML = `
+                    <figure style="text-align:center;margin:0 0 24px;">
+                        <img src="Udaan1.png" alt="Custom-built RC Aircraft"
+                             style="max-width:65%;border-radius:12px;display:block;margin:0 auto 10px;">
+                        <figcaption style="font-size:0.78rem;color:#7B7B7B;font-style:italic;">
+                            Project Showcase: Custom-built RC Aircraft
+                        </figcaption>
+                    </figure>
+                    ${renderText(aeroText)}`;
+
             } else if (dataType === 'vibe') {
-                modalBody.classList.add('blog-layout');
-                modalImg.src = 'Vibe.jpeg';
-                modalDesc.innerText = vibeText;
+                // Vibe Coding — small Vibe.jpeg thumbnail top-right, text wraps
+                modalDesc.innerHTML = `
+                    <img src="Vibe.jpeg" alt="Vibe Coding"
+                         style="float:right;width:38%;border-radius:12px;margin:0 0 16px 20px;">
+                    ${renderText(vibeText)}
+                    <div style="clear:both;"></div>`;
+
             } else {
-                modalBody.classList.remove('blog-layout');
-                modalImg.src = '';
-                modalDesc.innerText = '';
+                modalDesc.innerHTML = '';
             }
 
-            // Show Modal
+            // Show Modal — requestAnimationFrame for zero-lag paint
             modal.style.display = 'flex';
-            setTimeout(() => { modal.classList.add('show'); }, 10);
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => modal.classList.add('show'));
+            });
         });
     });
 
