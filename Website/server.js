@@ -12,7 +12,7 @@
  * URL:  http://localhost:3000
  */
 
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 
 const express = require('express');
 const helmet = require('helmet');
@@ -50,7 +50,7 @@ const chatLimiter = rateLimit({
 // ── Middleware ──────────────────────────────────────────────────────────────
 app.use(cors());
 app.use(express.json({ limit: '16kb' }));   // Hard cap on request body size
-app.use(express.static(__dirname));          // Serve index.html, css, images…
+app.use(express.static(path.join(__dirname)));  // Serve index.html, css, images…
 
 // ── POST /api/chat ──────────────────────────────────────────────────────────
 app.post('/api/chat', chatLimiter, async (req, res) => {
