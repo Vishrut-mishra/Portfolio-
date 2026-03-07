@@ -194,24 +194,21 @@ Model & Approach: Used gradient-boosted decision trees (XGBoost) to capture non-
 
 Business Impact: The finished model delivers a data-driven inventory management framework — reducing stockouts and waste. The analysis pinpoints the precise effect of oil price volatility on purchasing power, providing actionable insights for strategic planning in emerging markets.`;
 
-    const recoveryText = `Default Recovery Strategy
+    const recoveryText = `Assistant Manager: Patriot Schools, Unnao, India · July 2024 - Present
 
-The Problem:
-Payment defaults in an educational institution are rarely about money alone — they are almost always a signal of disengagement.That was the insight that changed everything.
+Growth Strategy & Design:
+Orchestrated regional marketing and outreach by leveraging demographic mapping to identify high-potential residential zones, while managing the creative design of all school prospectuses and branding materials.
 
-The Analysis:
-Using Python and Excel, I mapped fee - payment patterns across the student body.The data revealed a counterintuitive finding: lower - income families with daily wage earners were often more consistent with payments than middle - class families with steady incomes.The defaults were not explained by income — they were explained by relationship.
+Stakeholder & Data Management:
+Directed branch operations and guardian communications to ensure high responsiveness, while developing recovery strategies for fee-structure defaults based on internal data trend analysis.
 
-Further analysis confirmed the hypothesis: families with weaker bonds to the school — fewer parent - teacher interactions, less visibility into their child's progress — were the ones most likely to delay or default. The school was a transaction to them, not a community.
+Academic and operations Coordinator: Patriot Schools, Unnao, India · July 2023 - June 2024
 
-The Intervention:
-I designed a targeted programme of structured parent - teacher interactions: scheduled mentoring sessions, personalised progress updates, and proactive outreach to high - risk families before defaults occurred rather than after.
+Instructional Delivery:
+Applied quantitative reasoning to deliver Mathematics and Physics instruction for secondary students, maintaining high academic standards during the branch’s foundational year.
 
-The Outcome:
-Payment defaults dropped by approximately 15 %, recovering around 300,000 INR in outstanding fees — without a single legal notice or punitive measure.The lever was engagement, not enforcement.
-
-The Lesson:
-Data does not replace empathy — it directs it.The numbers told us where to look; the conversations did the rest.This experience is at the core of how I approach analytical work: not as a way to reduce people to data points, but as a way to understand them well enough to actually help.`;
+Process Optimization:
+Managed daily administrative workflows and optimized classroom scheduling to increase internal resource utilization and streamline foundational operations.`;
 
     const aeroText = `Vice - President, Udaan Technical Club — NIT Rourkela
 July 2021 – June 2022
