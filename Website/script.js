@@ -194,7 +194,7 @@ Model & Approach: Used gradient-boosted decision trees (XGBoost) to capture non-
 
 Business Impact: The finished model delivers a data-driven inventory management framework — reducing stockouts and waste. The analysis pinpoints the precise effect of oil price volatility on purchasing power, providing actionable insights for strategic planning in emerging markets.`;
 
-    const recoveryText = `Assistant Manager: Patriot Schools, Unnao, India · July 2024 - Present
+    const recoveryText = `Assistant Manager: Patriot Schools, Unnao, India · July 2024 - May 2025
 
 Growth Strategy & Design:
 Orchestrated regional marketing and outreach by leveraging demographic mapping to identify high-potential residential zones, while managing the creative design of all school prospectuses and branding materials.
