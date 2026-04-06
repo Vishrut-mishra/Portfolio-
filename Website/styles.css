@@ -275,6 +275,23 @@ main {
     opacity: 0.8;
 }
 
+.olist-card {
+    background-image: url('Olist.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.olist-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 100%);
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.olist-card:hover::before { opacity: 0.8; }
+
 .retail-card {
     background-image: url('Top category.png');
     background-size: cover;

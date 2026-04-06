@@ -257,7 +257,11 @@ Category Analysis: A key aspect of the project involved merging product categori
             modalBody.classList.remove('blog-layout');
             modalImg.src = '';
 
-            if (dataType === 'blog') {
+            if (dataType === 'olist') {
+                window.location.href = 'olist.html';
+                return;
+
+            } else if (dataType === 'blog') {
                 // Prisoners — book cover works great as a sidebar
                 modalBody.classList.add('blog-layout');
                 modalImg.src = 'Prisoners.jpg';

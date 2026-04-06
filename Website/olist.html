@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olist Case Study | Vishrut Mishra</title>
+    <meta name="description" content="RFM marketing analytics case study on the Olist Brazilian Marketplace — 100k+ transactions, 9 datasets merged, Tableau dashboards.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .case-hero {
+            padding: 130px 60px 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .case-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: #7B7B7B;
+            margin-bottom: 28px;
+            transition: color 0.2s;
+        }
+
+        .case-back:hover { color: #F8F8F8; }
+
+        .case-tag {
+            display: inline-block;
+            background: rgba(229,9,20,0.12);
+            border: 1px solid rgba(229,9,20,0.25);
+            color: #ff6b6b;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+        }
+
+        .case-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #F8F8F8;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .case-pill {
+            background: #2A2A2A;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .case-pill .dot { color: #E50914; }
+
+        .report-frame-wrapper {
+            max-width: 1300px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+
+        .report-frame {
+            width: 100%;
+            min-height: 100vh;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 20px;
+            background: #1e1e1e;
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            .case-hero { padding: 110px 20px 40px; }
+            .case-title { font-size: 1.8rem; }
+            .report-frame-wrapper { padding: 0 16px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay-texture"></div>
+
+    <header class="main-header">
+        <a href="index.html"><img src="logo.png" alt="VM Logo" class="logo-img"></a>
+        <nav class="pill-nav" id="main-nav">
+            <a href="about.html">About</a>
+            <a href="index.html#work">Work</a>
+            <a href="index.html#blog">Blog</a>
+            <a href="index.html#ai-chatbox">AI Chatbox</a>
+        </nav>
+        <a href="contact.html" class="contact-btn">Contact</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <main>
+        <div class="case-hero">
+            <a href="index.html#work" class="case-back">← Back to Works</a>
+            <div class="case-tag">Marketing Analytics · RFM · Tableau · Python</div>
+            <h1 class="case-title">Case Study: Olist Brazilian Marketplace</h1>
+            <div class="case-meta">
+                <span class="case-pill"><span class="dot">●</span> 100k+ Transactions</span>
+                <span class="case-pill"><span class="dot">●</span> 9 Datasets Merged</span>
+                <span class="case-pill"><span class="dot">●</span> 5 Live Tableau Dashboards</span>
+                <span class="case-pill"><span class="dot">●</span> Python · Pandas · Tableau</span>
+            </div>
+        </div>
+
+        <div class="report-frame-wrapper">
+            <iframe
+                src="Olist_Marketing_Report.html"
+                class="report-frame"
+                id="report-iframe"
+                scrolling="no"
+                frameborder="0"
+                title="Olist Marketing Report">
+            </iframe>
+        </div>
+    </main>
+
+    <script>
+        // Auto-resize iframe to match its content height
+        const iframe = document.getElementById('report-iframe');
+        iframe.addEventListener('load', () => {
+            try {
+                const h = iframe.contentDocument.body.scrollHeight;
+                iframe.style.height = h + 'px';
+            } catch(e) {
+                iframe.style.height = '3000px';
+            }
+        });
+
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const mainNav = document.getElementById('main-nav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mainNav.classList.toggle('mobile-open');
+        });
+        mainNav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mainNav.classList.remove('mobile-open');
+            });
+        });
+    </script>
+</body>
+
+</html>
