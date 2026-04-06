@@ -11,88 +11,211 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .case-hero {
-            padding: 130px 60px 50px;
-            max-width: 1100px;
+        /* ═══════════════════════════════════════════
+           OLIST PAGE — LOCAL STYLES
+        ═══════════════════════════════════════════ */
+        :root {
+            --pop-color: #E50914;
+            --code-bg: #1e1e1e;
+            --table-border: #3A3A3A;
+            --accent-glow: rgba(229, 9, 20, 0.1);
+        }
+
+        .olist-container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 140px 40px 100px;
+        }
+
+        /* ── Hero Section ── */
+        .case-hero {
+            margin-bottom: 80px;
         }
 
         .case-back {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.82rem;
-            color: #7B7B7B;
-            margin-bottom: 28px;
-            transition: color 0.2s;
+            font-size: 0.85rem;
+            color: var(--secondary-accents);
+            margin-bottom: 32px;
+            transition: color 0.3s ease;
         }
 
-        .case-back:hover { color: #F8F8F8; }
+        .case-back:hover { color: var(--tertiary-text); }
 
         .case-tag {
             display: inline-block;
-            background: rgba(229,9,20,0.12);
-            border: 1px solid rgba(229,9,20,0.25);
+            background: var(--accent-glow);
+            border: 1px solid rgba(229, 9, 20, 0.2);
             color: #ff6b6b;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             font-weight: 600;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .case-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.6rem;
+            font-size: 3.2rem;
             font-weight: 700;
-            color: #F8F8F8;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
+            color: var(--tertiary-text);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .case-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            margin-top: 20px;
         }
 
         .case-pill {
-            background: #2A2A2A;
-            border: 1px solid rgba(255,255,255,0.07);
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 30px;
-            padding: 6px 16px;
-            font-size: 0.8rem;
-            color: #ccc;
+            padding: 8px 18px;
+            font-size: 0.82rem;
+            color: var(--secondary-accents);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
-        .case-pill .dot { color: #E50914; }
+        .case-pill .dot { color: var(--pop-color); }
 
-        .report-frame-wrapper {
-            max-width: 1300px;
-            margin: 0 auto 80px;
-            padding: 0 40px;
+        /* ── Report Content ── */
+        .report-section {
+            margin-bottom: 80px;
         }
 
-        .report-frame {
+        .report-content h2 {
+            font-size: 1.8rem;
+            color: var(--tertiary-text);
+            margin: 60px 0 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .report-content h3 {
+            font-size: 1.4rem;
+            color: var(--pop-color);
+            margin: 40px 0 16px;
+        }
+
+        .report-content p {
+            font-size: 1.05rem;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .report-content strong { color: #fff; }
+
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 24px;
+        }
+
+        .report-content li {
+            font-size: 1.05rem;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        /* ── Code Blocks (VS Code Theme) ── */
+        .code-block {
+            background: #181818;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block pre { margin: 0; }
+        .code-block .keyword { color: #c586c0; }
+        .code-block .string { color: #ce9178; }
+        .code-block .comment { color: #6a9955; font-style: italic; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .variable { color: #9cdcfe; }
+
+        /* ── Dataframes ── */
+        .table-container {
+            margin: 24px 0 40px;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--table-border);
+        }
+
+        table.dataframe {
             width: 100%;
-            min-height: 100vh;
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 20px;
-            background: #1e1e1e;
-            display: block;
+            border-collapse: collapse;
+            font-size: 13px;
         }
 
-        @media (max-width: 640px) {
-            .case-hero { padding: 110px 20px 40px; }
-            .case-title { font-size: 1.8rem; }
-            .report-frame-wrapper { padding: 0 16px; }
+        table.dataframe th, table.dataframe td {
+            padding: 14px 20px;
+            border: 1px solid var(--table-border);
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        table.dataframe th {
+            background: #1a1a1a;
+            color: var(--secondary-accents);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 11px;
+        }
+
+        table.dataframe tr:nth-child(even) { background: #222; }
+
+        /* ── Tableau Containers ── */
+        .viz-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 48px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .viz-header {
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--pop-color);
+            padding-bottom: 12px;
+        }
+
+        .viz-header h4 {
+            color: var(--pop-color);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .viz-desc {
+            color: #333;
+            font-size: 0.92rem;
+            margin-top: 12px;
+        }
+
+        .viz-desc li { color: #333; font-size: 0.9rem; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .olist-container { padding: 120px 20px 60px; }
+            .case-title { font-size: 2.2rem; }
+            .viz-container { padding: 20px; }
         }
     </style>
 </head>
@@ -114,55 +237,137 @@
         </button>
     </header>
 
-    <main>
-        <div class="case-hero">
+    <main class="olist-container">
+        <!-- HERO -->
+        <section class="case-hero">
             <a href="index.html#work" class="case-back">← Back to Works</a>
-            <div class="case-tag">Marketing Analytics · RFM · Tableau · Python</div>
-            <h1 class="case-title">Case Study: Olist Brazilian Marketplace</h1>
+            <div class="case-tag">Marketing Analytics · RFM Framework</div>
+            <h1 class="case-title">Olist Brazilian Marketplace Case Study</h1>
             <div class="case-meta">
-                <span class="case-pill"><span class="dot">●</span> 100k+ Transactions</span>
+                <span class="case-pill"><span class="dot">●</span> 100,000+ Transactions</span>
                 <span class="case-pill"><span class="dot">●</span> 9 Datasets Merged</span>
-                <span class="case-pill"><span class="dot">●</span> 5 Live Tableau Dashboards</span>
-                <span class="case-pill"><span class="dot">●</span> Python · Pandas · Tableau</span>
+                <span class="case-pill"><span class="dot">●</span> Python · SQL · Tableau</span>
+                <span class="case-pill"><span class="dot">●</span> 5 Interactive Dashboards</span>
             </div>
-        </div>
+        </section>
 
-        <div class="report-frame-wrapper">
-            <iframe
-                src="Olist_Marketing_Report.html"
-                class="report-frame"
-                id="report-iframe"
-                scrolling="no"
-                frameborder="0"
-                title="Olist Marketing Report">
-            </iframe>
-        </div>
+        <section class="report-content">
+            <!-- INTRO -->
+            <div class="report-section">
+                <h2>1. Introduction & Problem Statement</h2>
+                <p>In the highly competitive e-commerce landscape, customer acquisition costs (CAC) are rising. For a marketplace like Olist, the primary challenge is not just finding new customers, but maximizing the Lifetime Value (CLV) of existing ones.</p>
+                <p><strong>The Problem:</strong> Raw transactional data is "silent." Without a structured analytical framework, the business cannot distinguish between a one-time buyer and a loyal brand advocate. This leads to inefficient marketing spend, where "At-Risk" customers are ignored and "VIPs" are under-served. We need to transform 100,000 rows of fragmented data into a clear Retention Strategy.</p>
+            </div>
+
+            <!-- METHODOLOGY -->
+            <div class="report-section">
+                <h2>2. Methodology & Data Dictionary</h2>
+                <p>To solve this, we architected a relational data environment by merging 9 separate datasets. Below are the primary tables engineered for this analysis:</p>
+                <ul>
+                    <li><strong>A. The Recency Table (Temporal Engine):</strong> Snapshot Date (Max Date + 5 days) used to calculate <code>Days_since_last_order</code>.</li>
+                    <li><strong>B. The VIP Table (Premium Customer Tracker):</strong> Aggregated orders merged with financial core to track CLV.</li>
+                    <li><strong>C. The Monetary Table (Financial Core):</strong> Tracks total revenue contribution and geographic wealth distribution across Brazil.</li>
+                    <li><strong>D. The Product Affinity Table (Segment Context):</strong> Maps high-value segments to specific product categories for targeted marketing.</li>
+                </ul>
+            </div>
+
+            <!-- STEP 1 -->
+            <div class="report-section">
+                <h2>Step 1: Building the Recency Table</h2>
+                <p>Establishing the temporal baseline involves merging customer base with orders. We drop all non-delivered items to avoid skewing metrics. Snapshot Date (Max Date + 5 days) allows for a stable measurement of relationship "freshness."</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># Merging orders and customers</span>
+merged = pd.merge(orders, customers, on=<span class="string">'customer_id'</span>, how=<span class="string">'left'</span>)
+merged = merged[merged[<span class="string">'order_status'</span>] == <span class="string">'delivered'</span>].copy()
+
+<span class="comment"># Establishing Snapshot Date</span>
+merged[<span class="string">'order_purchase_timestamp'</span>] = pd.to_datetime(merged[<span class="string">'order_purchase_timestamp'</span>])
+snapshot_date = merged[<span class="string">'order_purchase_timestamp'</span>].max() + pd.Timedelta(days=<span class="number">5</span>)
+
+<span class="comment"># Calculating Recency Core Value</span>
+merged[<span class="string">'Days_since_last_order'</span>] = (snapshot_date - merged[<span class="string">'order_purchase_timestamp'</span>]).dt.days</code></pre>
+                </div>
+
+                <div class="table-container">
+                    <table border="1" class="dataframe">
+                      <thead>
+                        <tr><th>order_id</th><th>order_status</th><th>customer_unique_id</th><th>customer_city</th><th>Days_since_last_order</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>e481f51cbdc54678b7cc49136f2...</td><td>delivered</td><td>7c396fd4830fd04220f754e42b4e5bff</td><td>sao paulo</td><td>336</td></tr>
+                        <tr><td>53cdb2fc8bc7dce0b6741e21502...</td><td>delivered</td><td>af07308b275d755c9edb36a90c618231</td><td>barreiras</td><td>40</td></tr>
+                        <tr><td>47770eb9100c2d0c44946d9cf07...</td><td>delivered</td><td>3a653a41f6f9fc3d2a113cf8398680e8</td><td>vianopolis</td><td>26</td></tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TABLEAU: REVENUE MAP -->
+            <div class="viz-container">
+                <div class="viz-header">
+                    <h4>The Economic Heart (Monetary & Geography)</h4>
+                </div>
+                <div class="viz-desc">
+                    <p><strong>The Insight:</strong> Revenue is not evenly distributed across Brazil. São Paulo (SP) and Rio de Janeiro (RJ) dominate the financial footprint.</p>
+                </div>
+                <div class='tableauPlaceholder' id='viz1775304855588' style='position: relative'><noscript><a href='#'><img alt='Brazil Revenue Map ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RevenueMap_17753047352710&#47;BrazilRevenueMap&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='RevenueMap_17753047352710&#47;BrazilRevenueMap' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RevenueMap_17753047352710&#47;BrazilRevenueMap&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+            </div>
+
+            <!-- STEPS 2-5 Summarized summary -->
+            <div class="report-section">
+                <h2>Step 2-5: Building the RFM Engine</h2>
+                <p>We systematically isolated <strong>Frequency</strong> (nunique order_id) and <strong>Monetary</strong> value (sum of payments) keeping only successful deliveries. Merging these generated the master <strong>VIP Table</strong>.</p>
+                
+                <div class="table-container">
+                    <table border="1" class="dataframe">
+                      <thead>
+                        <tr><th>customer_unique_id</th><th>frequency</th><th>payment_value</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>8d50f5eadf50201ccdcedfb9e2ac8455</td><td>15</td><td>879.27</td></tr>
+                        <tr><td>3e43e6105506432c953e165fb2acf44c</td><td>9</td><td>1172.66</td></tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TABLEAU: DASHBOARDS -->
+            <div class="viz-container">
+                <div class="viz-header">
+                    <h4>The Staircase to Churn (Recency Bins)</h4>
+                </div>
+                <div class='tableauPlaceholder' id='viz1775304820945' style='position: relative'><noscript><a href='#'><img alt='Recency with bins ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RecencyBin&#47;Recencywithbins&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='RecencyBin&#47;Recencywithbins' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RecencyBin&#47;Recencywithbins&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+            </div>
+
+            <div class="viz-container">
+                <div class="viz-header">
+                    <h4>Top Product Anchor Categories</h4>
+                </div>
+                <div class='tableauPlaceholder' id='viz1775304880406' style='position: relative'><noscript><a href='#'><img alt='Top Category ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;TopCategory_17753047736120&#47;TopCategory&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='TopCategory_17753047736120&#47;TopCategory' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;TopCategory_17753047736120&#47;TopCategory&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
+            </div>
+
+            <!-- CONCLUSION -->
+            <div class="report-section">
+                <h2>6. Next Steps & Recovery Plan</h2>
+                <p>Identifying the "Economic Heart" and the "Staircase to Churn" allows for surgical precision in marketing. The next phase involves using the <strong>Product Affinity</strong> engine to automate "Next Best Offer" campaigns for customers in the 60-90 day churn window.</p>
+                <p>Wait times and logistics should be prioritized for the high-revenue states identified in the Revenue Map to maintain the platform's stability.</p>
+            </div>
+        </section>
     </main>
 
+    <script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
     <script>
-        // Auto-resize iframe to match its content height
-        const iframe = document.getElementById('report-iframe');
-        iframe.addEventListener('load', () => {
-            try {
-                const h = iframe.contentDocument.body.scrollHeight;
-                iframe.style.height = h + 'px';
-            } catch(e) {
-                iframe.style.height = '3000px';
-            }
-        });
-
+        // Automatic viz sizing handled by tableau library
         // Hamburger toggle
         const hamburger = document.getElementById('hamburger');
         const mainNav = document.getElementById('main-nav');
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('open');
             mainNav.classList.toggle('mobile-open');
-        });
-        mainNav.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                mainNav.classList.remove('mobile-open');
-            });
         });
     </script>
 </body>

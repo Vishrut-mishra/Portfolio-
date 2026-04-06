@@ -176,23 +176,7 @@ The Logo & Design:
 Created in Figma using four years of Industrial Design training as the foundation — minimal, editorial, intentional.
 
 The Lesson:
-The most valuable skill is not syntax. It is knowing what to build and guiding AI to build it well. That is Vibe Coding.`;
-
-    const storeSalesText = `Store Sales Time Series Forecasting (2025)
-
-Goal: Forecast daily sales across 54 store locations to maximise supply chain efficiency for Corporación Favorita, a major Ecuadorian retailer. This Time-Series challenge involves predicting demand for thousands of product families by integrating multiple external variables.
-
-Technical Methodology
-
-Data Integration: Used Pandas left-joins to merge the primary transaction ledger with secondary datasets (holidays, stores, and oil prices), ensuring data integrity across temporal and geographical keys.
-
-Feature Engineering: Created "Temporal Features" to capture behavioural patterns — including Lag Features and a Payday Effect encoding to account for autocorrelation in retail sales.
-
-Missing Value Strategy: Applied forward-fill imputation for the Oil Price index, bridging the gap between the 5-day stock market cycle and the 7-day retail cycle to prevent data leaks.
-
-Model & Approach: Used gradient-boosted decision trees (XGBoost) to capture non-linear relationships between economic changes and consumer spending. Validated with a Time-Series Split to ensure the model learned genuine predictive patterns rather than memorising historical noise.
-
-Business Impact: The finished model delivers a data-driven inventory management framework — reducing stockouts and waste. The analysis pinpoints the precise effect of oil price volatility on purchasing power, providing actionable insights for strategic planning in emerging markets.`;
+The most valuable skill is not syntax. It is knowing what to build and guiding AI to build it well.`;
 
     const recoveryText = `Operations Analyst — Patriot Schools, Unnao, India · Jul 2023 – Jul 2025
 
@@ -223,16 +207,7 @@ Vishrut rose to Vice - President.By then, the club had grown from under 10 to ov
 The Lasting Impact:
 The trajectory they built hasn't come down since. The club is still growing — bigger and more successful with time. Vishrut is proud of what they built together: not just planes, but a community.`;
 
-    const retailText = `Online Retail Analysis
 
-Goal: Analyze transactional data from a UK-based online retail store to uncover revenue trends and customer behaviour, highlighting patterns through merging product category charts.
-
-Technical Methodology:
-Data Cleaning: Filtered out cancelled orders and invalid invoice numbers using Pandas. Computed Total Revenue for each transaction.
-
-Temporal Analysis: Engineered 'Year-Month' temporal features to evaluate monthly sales trends and understand seasonality.
-
-Category Analysis: A key aspect of the project involved merging product categories. By graphing the top categories, I was able to demonstrate which categories drive the most value, forming an actionable basis for inventory planning.`;
 
     // ── Helper: render text with section headings bold ────────────────────
     function renderText(text) {
@@ -257,7 +232,7 @@ Category Analysis: A key aspect of the project involved merging product categori
             modalBody.classList.remove('blog-layout');
             modalImg.src = '';
 
-            if (dataType === 'olist') {
+            if (dataType === 'olist' || dataType === 'olist-alt') {
                 window.location.href = 'olist.html';
                 return;
 
@@ -267,24 +242,7 @@ Category Analysis: A key aspect of the project involved merging product categori
                 modalImg.src = 'Prisoners.jpg';
                 modalDesc.innerText = prisonersText;
 
-            } else if (dataType === 'retail') {
-                // Online Retail Analysis
-                modalDesc.innerHTML = `
-                    <figure style="float:right;width:50%;margin:4px 0 16px 20px;text-align:center;">
-                        <img src="Top category.png" alt="Merged Product Categories"
-                             style="width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.4);">
-                        <figcaption style="font-size:0.72rem;color:#7B7B7B;font-style:italic;margin-top:6px;">
-                            Merging Product Category Chart
-                        </figcaption>
-                    </figure>
-                    ${renderText(retailText)}
-                    <div style="clear:both;"></div>`;
 
-            } else if (dataType === 'ml') {
-                // Store Sales — text only
-                modalDesc.innerHTML = renderText(storeSalesText);
-
-            } else if (dataType === 'recovery') {
                 // Assistant Manager — text only
                 modalDesc.innerHTML = renderText(recoveryText);
 
