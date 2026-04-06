@@ -178,6 +178,22 @@ Created in Figma using four years of Industrial Design training as the foundatio
 The Lesson:
 The most valuable skill is not syntax. It is knowing what to build and guiding AI to build it well.`;
 
+    const storeSalesText = `Store Sales Time Series Forecasting (2025)
+
+Goal: Forecast daily sales across 54 store locations to maximise supply chain efficiency for Corporación Favorita, a major Ecuadorian retailer. This Time-Series challenge involves predicting demand for thousands of product families by integrating multiple external variables.
+
+Technical Methodology
+
+Data Integration: Used Pandas left-joins to merge the primary transaction ledger with secondary datasets (holidays, stores, and oil prices), ensuring data integrity across temporal and geographical keys.
+
+Feature Engineering: Created "Temporal Features" to capture behavioural patterns — including Lag Features and a Payday Effect encoding to account for autocorrelation in retail sales.
+
+Missing Value Strategy: Applied forward-fill imputation for the Oil Price index, bridging the gap between the 5-day stock market cycle and the 7-day retail cycle to prevent data leaks.
+
+Model & Approach: Used gradient-boosted decision trees (XGBoost) to capture non-linear relationships between economic changes and consumer spending. Validated with a Time-Series Split to ensure the model learned genuine predictive patterns rather than memorising historical noise.
+
+Business Impact: The finished model delivers a data-driven inventory management framework — reducing stockouts and waste. The analysis pinpoints the precise effect of oil price volatility on purchasing power, providing actionable insights for strategic planning in emerging markets.`;
+
     const recoveryText = `Operations Analyst — Patriot Schools, Unnao, India · Jul 2023 – Jul 2025
 
 Scaling & Growth:
@@ -232,7 +248,7 @@ The trajectory they built hasn't come down since. The club is still growing — 
             modalBody.classList.remove('blog-layout');
             modalImg.src = '';
 
-            if (dataType === 'olist' || dataType === 'olist-alt') {
+            if (dataType === 'olist') {
                 window.location.href = 'olist.html';
                 return;
 
@@ -245,6 +261,10 @@ The trajectory they built hasn't come down since. The club is still growing — 
 
                 // Assistant Manager — text only
                 modalDesc.innerHTML = renderText(recoveryText);
+
+            } else if (dataType === 'ml') {
+                // Store Sales — text only
+                modalDesc.innerHTML = renderText(storeSalesText);
 
             } else if (dataType === 'aero') {
                 // Aeromodelling — Udaan1.png floats right, text wraps, caption below image
