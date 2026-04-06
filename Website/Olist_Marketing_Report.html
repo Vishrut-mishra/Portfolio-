@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Olist Brazilian Marketplace Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary-bg: #1e1e1e;
+        --secondary-accents: #7B7B7B;
+        --tertiary-text: #ffffff;
+        --card-bg: #252526;
+        --font-heading: 'Outfit', sans-serif;
+        --font-body: 'Inter', sans-serif;
+        --border-radius-card: 16px;
+    }
+    body { font-family: var(--font-body); line-height: 1.7; color: var(--tertiary-text); max-width: 1400px; margin: 0 auto; padding: 40px; background: var(--primary-bg); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
+    h1 { color: var(--pop-color); border-bottom: 1px solid #333333; padding-bottom: 12px; font-weight: 700; letter-spacing: -0.5px; }
+    h2 { color: var(--pop-color); border-bottom: 1px solid #3A3A3A; padding-bottom: 8px; margin-top: 40px; font-weight: 600; font-size: 1.7rem; }
+    strong { color: var(--pop-color); font-weight: 700; letter-spacing: 0.5px; }
+    .cell { background: var(--card-bg); border: 1px solid #333333; border-radius: var(--border-radius-card); margin-bottom: 30px; padding: 30px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); transition: transform 0.2s ease; }
+    .cell:hover { transform: translateY(-2px); border-color: #444; }
+    .markdown-cell { background: var(--primary-bg); padding: 30px; border-radius: var(--border-radius-card); margin-bottom: 40px; border-left: 4px solid #333; border: 1px solid #333; }
+    table.dataframe { border-collapse: collapse; width: 100%; margin-bottom: 20px; font-size: 13px; font-family: var(--font-body); overflow-x: auto; display: block; border-radius: 8px; border: 1px solid #444; }
+    table.dataframe th, table.dataframe td { border: 1px solid #3A3A3A; padding: 12px 16px; text-align: left; white-space: nowrap; }
+    table.dataframe th { background-color: #1a1a1a; font-weight: 600; color: var(--secondary-accents); text-transform: uppercase; font-size: 11px; letter-spacing: 1px; border-bottom: 2px solid #555; }
+    table.dataframe tr:nth-child(even) { background-color: #262626; }
+    table.dataframe tr:nth-child(odd) { background-color: var(--card-bg); }
+    table.dataframe tr:hover { background-color: #333; }
+    .output-label { font-size: 12px; font-weight: 700; color: var(--tertiary-text); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 25px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 6px; font-family: var(--font-heading); }
+    
+    
+/* VS Code Dark+ Syntax Highlighting */
+.code-highlight { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; font-size: 13px; margin: 20px 0; font-family: "SFMono-Regular", Consolas, monospace; overflow-x: auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); border: 1px solid #333; }
+.code-highlight pre { margin: 0; line-height: 1.5; }
+.code-highlight .k, .code-highlight .kn { color: #c586c0; } /* keyword (import, from) */
+.code-highlight .kd, .code-highlight .kc { color: #569cd6; } /* def, True, False */
+.code-highlight .s1, .code-highlight .s2, .code-highlight .s { color: #ce9178; } /* string */
+.code-highlight .c1, .code-highlight .c, .code-highlight .cm { color: #6a9955; } /* comment */
+.code-highlight .nf { color: #dcdcaa; } /* function */
+.code-highlight .nc { color: #4ec9b0; } /* class */
+.code-highlight .n { color: #9cdcfe; } /* variable */
+.code-highlight .o, .code-highlight .p { color: #d4d4d4; } /* operator/punctuation */
+.code-highlight .mi, .code-highlight .mf { color: #b5cea8; } /* number */
+
+</style>
+</head>
+<body>
+
+<div class="markdown-cell">
+    <h1>Case Study: Olist Brazilian Marketplace (100k+ Transactions)</h1>
+    
+    <h2>1. Introduction & Problem Statement</h2>
+    <p>In the highly competitive e-commerce landscape, customer acquisition costs (CAC) are rising. For a marketplace like Olist, the primary challenge is not just finding new customers, but maximizing the Lifetime Value (CLV) of existing ones.</p>
+    <p><strong>The Problem:</strong> Raw transactional data is "silent." Without a structured analytical framework, the business cannot distinguish between a one-time buyer and a loyal brand advocate. This leads to inefficient marketing spend, where "At-Risk" customers are ignored and "VIPs" are under-served. We need to transform 100,000 rows of fragmented data into a clear Retention Strategy.</p>
+    
+    <h2>2. Methodology & Data Dictionary</h2>
+    <p>To solve this, we architected a relational data environment by merging 9 separate datasets. Below are the primary tables engineered for this analysis:</p>
+    
+    <ul>
+        <li><strong>A. The Recency Table (Temporal Engine)</strong><br>
+        <em>Source:</em> orders + customers<br>
+        <em>Key Elements:</em> order_purchase_timestamp, order_status, customer_unique_id.<br>
+        <em>Feature Engineering:</em> Created a Snapshot Date (Max Date + 5 days) to calculate Days_since_last_order.<br>
+        <em>Purpose:</em> Measures the "freshness" of the customer relationship and identifies churn patterns.</li>
+        
+        <li><strong>B. The VIP Table (Premium Customer Tracker)</strong><br>
+        <em>Source:</em> Aggregated orders merged with financial core<br>
+        <em>Key Elements:</em> customer_unique_id, frequency, payment_value.<br>
+        <em>Purpose:</em> Quantifies customer engagement and spend. This allows us to definitively recognize our highest value premium tier based on both how often they purchase and their total monetary footprint.</li>
+        
+        <li><strong>C. The Monetary Table (Financial Core)</strong><br>
+        <em>Source:</em> order_payments + customers + geolocation<br>
+        <em>Key Elements:</em> payment_value, payment_type, lat/lng coordinates.<br>
+        <em>Purpose:</em> Tracks total revenue contribution and geographic wealth distribution across Brazil.</li>
+        
+        <li><strong>D. The Product Affinity Table (Segment Context)</strong><br>
+        <em>Source:</em> order_items + products + translation_lookup<br>
+        <em>Key Elements:</em> product_id, product_category_name_english, price.<br>
+        <em>Purpose:</em> Maps high-value segments to specific product categories to enable Targeted Lifecycle Marketing.</li>
+    </ul>
+
+    <h2>3. Project Aim & Objectives</h2>
+    <p>The ultimate goal of this project is to build a Tableau-powered Marketing Command Center. To achieve this, our data preparation focused on three strategic aims:</p>
+    <ol>
+        <li><strong>Unified RFM Scoring:</strong> Merge the R, F, and M metrics into a single "Golden Record" per customer. This allows for Unsupervised Learning (K-Means Clustering) to automatically group customers into personas (e.g., "Champions," "Can't Lose Them," "Hibernating").</li>
+        <li><strong>Geospatial Revenue Mapping:</strong> Use payment values and coordinates to visualize the "Economic Heart" of the marketplace, identifying which Brazilian states require more logistical or marketing investment.</li>
+        <li><strong>Actionable Strategy Development:</strong> Use the Product Affinity data to design a 1-page "Recovery Plan" for At-Risk VIPs, specifically suggesting categories they are likely to buy based on their historical behavior.</li>
+    </ol>
+</div>
+
+<div class="cell">
+    <h2>Step 1: Building the Recency Table</h2>
+    <p>This script establishes our temporal baseline. First, we merge the customer base with the orders database. <strong>Why?</strong> To link physical purchases to unique consumer IDs. We then explicitly drop all data where <code>order_status</code> is not 'delivered'. Including canceled or failed orders artificially skews recency metrics, implying a successful retail interaction that never materialized. Finally, we calculate a constant 'Snapshot Date' (adding 5 days to the max purchase date in the entire dataset) to mathematically compute exactly how many days have elapsed since every individual's last successful transaction.</p>
+    <div class="code-highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># STEP 1: Load the base datasets</span>
+<span class="n">orders</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_orders_dataset.csv&#39;</span><span class="p">)</span>
+<span class="n">customers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_customers_dataset.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 2: Merge the tables together mapped perfectly on &#39;customer_id&#39; </span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 2.5: Consistent Filtering! </span>
+<span class="c1"># We cleanly filter out failed, invoiced, or canceled orders right here at the root level!</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="n">merged</span><span class="p">[</span><span class="s1">&#39;order_status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;delivered&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># STEP 3: Handle the Math for Time Tracking </span>
+<span class="c1"># We explicitly convert our main timestamp string column natively into pandas DateTime formatting.</span>
+<span class="n">merged</span><span class="p">[</span><span class="s1">&#39;order_purchase_timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">merged</span><span class="p">[</span><span class="s1">&#39;order_purchase_timestamp&#39;</span><span class="p">])</span>
+
+<span class="c1"># We manually identify the exact absolute latest purchase date in the entire universe of this dataset.</span>
+<span class="n">latest_purchase_date</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;order_purchase_timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="c1"># Using python timedelta logic, we systematically add exactly 5 forward bounds (days).</span>
+<span class="c1"># This establishes our firm, stable analytical &#39;Snapshot Date&#39;.</span>
+<span class="n">snapshot_date</span> <span class="o">=</span> <span class="n">latest_purchase_date</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># STEP 4: Calculate the explicit Recency Core Value</span>
+<span class="c1"># We literally subtract the unique customer&#39;s specific timestamp away from our fixed forward snapshot date.</span>
+<span class="c1"># We then isolate specifically the underlying `.dt.days` count map.</span>
+<span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Days_since_last_order&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">snapshot_date</span> <span class="o">-</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;order_purchase_timestamp&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+
+<span class="c1"># STEP 5: Store the modified database completely silently to disk</span>
+<span class="n">merged</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Recency Table.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    <div class="output-label">OUTPUT (TOP 5 ROWS): Recency Table</div>
+    <table border="1" class="dataframe dataframe table table-striped table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th>order_id</th>
+      <th>customer_id</th>
+      <th>order_status</th>
+      <th>order_purchase_timestamp</th>
+      <th>order_approved_at</th>
+      <th>order_delivered_carrier_date</th>
+      <th>order_delivered_customer_date</th>
+      <th>order_estimated_delivery_date</th>
+      <th>customer_unique_id</th>
+      <th>customer_zip_code_prefix</th>
+      <th>customer_city</th>
+      <th>customer_state</th>
+      <th>Days_since_last_order</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>e481f51cbdc54678b7cc49136f2d6af7</td>
+      <td>9ef432eb6251297304e76186b10a928d</td>
+      <td>delivered</td>
+      <td>2017-10-02 10:56:33</td>
+      <td>2017-10-02 11:07:15</td>
+      <td>2017-10-04 19:55:00</td>
+      <td>2017-10-10 21:25:13</td>
+      <td>2017-10-18 00:00:00</td>
+      <td>7c396fd4830fd04220f754e42b4e5bff</td>
+      <td>3149</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+      <td>336</td>
+    </tr>
+    <tr>
+      <td>53cdb2fc8bc7dce0b6741e2150273451</td>
+      <td>b0830fb4747a6c6d20dea0b8c802d7ef</td>
+      <td>delivered</td>
+      <td>2018-07-24 20:41:37</td>
+      <td>2018-07-26 03:24:27</td>
+      <td>2018-07-26 14:31:00</td>
+      <td>2018-08-07 15:27:45</td>
+      <td>2018-08-13 00:00:00</td>
+      <td>af07308b275d755c9edb36a90c618231</td>
+      <td>47813</td>
+      <td>barreiras</td>
+      <td>BA</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>47770eb9100c2d0c44946d9cf07ec65d</td>
+      <td>41ce2a54c0b03bf3443c3d931a367089</td>
+      <td>delivered</td>
+      <td>2018-08-08 08:38:49</td>
+      <td>2018-08-08 08:55:23</td>
+      <td>2018-08-08 13:50:00</td>
+      <td>2018-08-17 18:06:29</td>
+      <td>2018-09-04 00:00:00</td>
+      <td>3a653a41f6f9fc3d2a113cf8398680e8</td>
+      <td>75265</td>
+      <td>vianopolis</td>
+      <td>GO</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>949d5b44dbf5de918fe9c16f97b45f8a</td>
+      <td>f88197465ea7920adcdbec7375364d82</td>
+      <td>delivered</td>
+      <td>2017-11-18 19:28:06</td>
+      <td>2017-11-18 19:45:59</td>
+      <td>2017-11-22 13:39:59</td>
+      <td>2017-12-02 00:28:42</td>
+      <td>2017-12-15 00:00:00</td>
+      <td>7c142cf63193a1473d2e66489a9ae977</td>
+      <td>59296</td>
+      <td>sao goncalo do amarante</td>
+      <td>RN</td>
+      <td>288</td>
+    </tr>
+    <tr>
+      <td>ad21c59c0840e6cb83a9ceb5573f8159</td>
+      <td>8ab97904e6daea8866dbdbc4fb7aad2c</td>
+      <td>delivered</td>
+      <td>2018-02-13 21:18:39</td>
+      <td>2018-02-13 22:20:29</td>
+      <td>2018-02-14 19:46:34</td>
+      <td>2018-02-16 18:17:02</td>
+      <td>2018-02-26 00:00:00</td>
+      <td>72632f0f9dd73dfee390c9b22eb56dd6</td>
+      <td>9195</td>
+      <td>santo andre</td>
+      <td>SP</td>
+      <td>201</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="cell">
+    <h2>Step 2: Building the Frequency Table</h2>
+    <p>Here, we mathematically isolate recurring premium customers. <strong>Why?</strong> Frequency is the ultimate marker for brand loyalty. We strictly mandate that the dataset only registers 'delivered' items—again, to prevent inflated loyalty tracking from refunded returns. By leveraging a strict <code>.nunique()</code> isolation specifically on actual `order_id` values, we guarantee that multiple items bought within one single checkout basket aren't incorrectly counting as separate visits.</p>
+    <div class="code-highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># STEP 1: Load the combined data</span>
+<span class="c1"># We read the previously created &#39;Recency Table.csv&#39; into a DataFrame.</span>
+<span class="n">recency_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Recency Table.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 1.5: Filter out non-delivered orders</span>
+<span class="c1"># We strictly evaluate frequency metrics ONLY on successfully &#39;delivered&#39; orders.</span>
+<span class="n">recency_df</span> <span class="o">=</span> <span class="n">recency_df</span><span class="p">[</span><span class="n">recency_df</span><span class="p">[</span><span class="s1">&#39;order_status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;delivered&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># STEP 2: Calculate Frequency (How many distinct orders did each customer place?)</span>
+<span class="c1"># Let&#39;s break down exactly what this single line of code is doing:</span>
+<span class="c1"># 1. `.groupby(&#39;customer_unique_id&#39;)`: It gathers all rows belonging to the same actual person into groups.</span>
+<span class="c1"># 2. `[&#39;order_id&#39;]`: From those groups, it focuses only on the column containing the underlying order IDs.</span>
+<span class="c1"># 3. `.nunique()`: It asks, &quot;How many uniquely different order IDs are inside this group?&quot; </span>
+<span class="c1">#                  (This is crucial! If a customer bought 3 products in a single checkout, they will have 3 rows </span>
+<span class="c1">#                  sharing the exact same order_id. `nunique` ensures we just count that as 1 distinct order.)</span>
+<span class="c1"># 4. `.reset_index()`: pandas defaults to making the grouped column (customer_unique_id) an &quot;index&quot; label. </span>
+<span class="c1">#                      This turns it back into a standard, neat 2-column DataFrame holding customer_unique_id and their order_id counts.</span>
+<span class="n">frequency_df</span> <span class="o">=</span> <span class="n">recency_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_unique_id&#39;</span><span class="p">)[</span><span class="s1">&#39;order_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># STEP 3: Rename the column to be descriptive</span>
+<span class="c1"># After the step above, the column holding our counts is confusingly still named &#39;order_id&#39;.</span>
+<span class="c1"># We rename it to &#39;frequency&#39; so we know this column represents the count of total orders.</span>
+<span class="n">frequency_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;order_id&#39;</span><span class="p">:</span> <span class="s1">&#39;frequency&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># STEP 4: Sort the data</span>
+<span class="c1"># We sort the DataFrame based on the &#39;frequency&#39; column in descending order (highest to lowest).</span>
+<span class="c1"># This helps us easily see our most loyal/frequent customers at the very top of the table.</span>
+<span class="n">frequency_df</span> <span class="o">=</span> <span class="n">frequency_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># STEP 5: Save our final metric table</span>
+<span class="c1"># We export this new tiny table (which just maps a unique customer to their total order count) to a CSV file.</span>
+<span class="c1"># `index=False` makes sure pandas doesn&#39;t write out the row numbers (0, 1, 2, 3...) to the file.</span>
+<span class="n">frequency_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Frequency Table.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    <div class="output-label">OUTPUT (TOP 5 ROWS): Frequency Table</div>
+    <table border="1" class="dataframe dataframe table table-striped table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th>customer_unique_id</th>
+      <th>frequency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8d50f5eadf50201ccdcedfb9e2ac8455</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>3e43e6105506432c953e165fb2acf44c</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>6469f99c1f9dfae7733b25662e7f1782</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>ca77025e7201e3b30c44b472ff346268</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>1b6c7548a2a1f9037c1fd3ddfed95f33</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="cell">
+    <h2>Step 3: Building the Monetary Table</h2>
+    <p>We combine sheer financial payment totals with customer IDs to track CLV (Customer Lifetime Value). <strong>Why?</strong> The highest-frequency buyer doesn't matter if their cart values are zero. We meticulously dropped tracking columns like <code>order_approved_at</code>, <code>estimated_delivery_date</code>, and <code>order_status</code> because they offer zero relevant value to monetary modeling and just bloat the pipeline. We also safely executed a <code>drop_duplicates()</code> on the 1M+ row geolocation map before merging. <strong>Why?</strong> To prevent catastrophic 'row-multiplication' where multiple identical zip-code coordinates artificially duplicate a customer's total payment spend.</p>
+    <div class="code-highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># STEP 1: Basic Merge (Orders + Customers)</span>
+<span class="n">orders</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_orders_dataset.csv&#39;</span><span class="p">)</span>
+<span class="n">customers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_customers_dataset.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Join the datasets perfectly keeping all orders</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># FILTER: Keep only &#39;delivered&#39; orders, then drop irrelevant columns</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;order_status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;delivered&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+    <span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;order_status&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;order_approved_at&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;order_delivered_carrier_date&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;order_delivered_customer_date&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;order_estimated_delivery_date&#39;</span>
+<span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># STEP 2: Geolocation Data</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_geolocation_dataset.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># CRITICAL: The geolocation dataset has many rows for the exact same zip code (over 1M rows!).</span>
+<span class="c1"># If we do a raw join, it will multiply our orders massively. </span>
+<span class="c1"># We must drop duplicated zip codes so there is exactly 1 geographical point per zip code.</span>
+<span class="n">geo_unique</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geolocation_zip_code_prefix&#39;</span><span class="p">])</span>
+
+<span class="c1"># Left join using customer zip code -&gt; geolocation zip code</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">geo_unique</span><span class="p">,</span>
+    <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;customer_zip_code_prefix&#39;</span><span class="p">,</span>
+    <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;geolocation_zip_code_prefix&#39;</span><span class="p">,</span>
+    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Drop the redundant city and state columns as requested</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geolocation_city&#39;</span><span class="p">,</span> <span class="s1">&#39;geolocation_state&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># STEP 3: Payment Data</span>
+<span class="n">payments</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_order_payments_dataset.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Left join on order_id. We keep everything from payments.</span>
+<span class="c1"># Note: If an order was paid in multiple installments (e.g. card + voucher), </span>
+<span class="c1"># this WILL increase the row count because each payment will have its own row!</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">payments</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Save the master monetary table</span>
+<span class="n">output_filename</span> <span class="o">=</span> <span class="s1">&#39;Monetary Table.csv&#39;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    <div class="output-label">OUTPUT (TOP 5 ROWS): Monetary Table</div>
+    <table border="1" class="dataframe dataframe table table-striped table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th>order_id</th>
+      <th>order_purchase_timestamp</th>
+      <th>customer_unique_id</th>
+      <th>customer_zip_code_prefix</th>
+      <th>customer_city</th>
+      <th>customer_state</th>
+      <th>geolocation_zip_code_prefix</th>
+      <th>geolocation_lat</th>
+      <th>geolocation_lng</th>
+      <th>payment_sequential</th>
+      <th>payment_type</th>
+      <th>payment_installments</th>
+      <th>payment_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>e481f51cbdc54678b7cc49136f2d6af7</td>
+      <td>2017-10-02 10:56:33</td>
+      <td>7c396fd4830fd04220f754e42b4e5bff</td>
+      <td>3149</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+      <td>3149.0</td>
+      <td>-23.574809</td>
+      <td>-46.587471</td>
+      <td>1.0</td>
+      <td>credit_card</td>
+      <td>1.0</td>
+      <td>18.12</td>
+    </tr>
+    <tr>
+      <td>e481f51cbdc54678b7cc49136f2d6af7</td>
+      <td>2017-10-02 10:56:33</td>
+      <td>7c396fd4830fd04220f754e42b4e5bff</td>
+      <td>3149</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+      <td>3149.0</td>
+      <td>-23.574809</td>
+      <td>-46.587471</td>
+      <td>3.0</td>
+      <td>voucher</td>
+      <td>1.0</td>
+      <td>2.00</td>
+    </tr>
+    <tr>
+      <td>e481f51cbdc54678b7cc49136f2d6af7</td>
+      <td>2017-10-02 10:56:33</td>
+      <td>7c396fd4830fd04220f754e42b4e5bff</td>
+      <td>3149</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+      <td>3149.0</td>
+      <td>-23.574809</td>
+      <td>-46.587471</td>
+      <td>2.0</td>
+      <td>voucher</td>
+      <td>1.0</td>
+      <td>18.59</td>
+    </tr>
+    <tr>
+      <td>53cdb2fc8bc7dce0b6741e2150273451</td>
+      <td>2018-07-24 20:41:37</td>
+      <td>af07308b275d755c9edb36a90c618231</td>
+      <td>47813</td>
+      <td>barreiras</td>
+      <td>BA</td>
+      <td>47813.0</td>
+      <td>-12.169860</td>
+      <td>-44.988369</td>
+      <td>1.0</td>
+      <td>boleto</td>
+      <td>1.0</td>
+      <td>141.46</td>
+    </tr>
+    <tr>
+      <td>47770eb9100c2d0c44946d9cf07ec65d</td>
+      <td>2018-08-08 08:38:49</td>
+      <td>3a653a41f6f9fc3d2a113cf8398680e8</td>
+      <td>75265</td>
+      <td>vianopolis</td>
+      <td>GO</td>
+      <td>75265.0</td>
+      <td>-16.746337</td>
+      <td>-48.514624</td>
+      <td>1.0</td>
+      <td>credit_card</td>
+      <td>3.0</td>
+      <td>179.12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="cell">
+    <h2>Step 4: Building the Product Affinity Table</h2>
+    <p>This links English product categories back to our core buyers. <strong>Why?</strong> We forcefully drop columns like <code>product_height_cm</code>, <code>product_weight_g</code>, and shipping bounds. A marketing command center doesn't care about the physical cubic volume or warehouse weight of a product; it exclusively requires the contextual categorization of what the user likes to buy. Trimming this fat yields a highly optimized blueprint ready for content-targeting engines.</p>
+    <div class="code-highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># STEP 1: Load the Base Datasets</span>
+<span class="c1"># We start by bringing our two foundational files directly into memory: the list of all orders and the list of customers.</span>
+<span class="n">orders</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_orders_dataset.csv&#39;</span><span class="p">)</span>
+<span class="n">customers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_customers_dataset.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 2: Customers-Orders Connection</span>
+<span class="c1"># We securely attach all customer details (like zip codes and unique IDs) onto the master orders list.</span>
+<span class="c1"># The &#39;left join&#39; ensures we perfectly match them based on their exact shared &#39;customer_id&#39; without losing any orders.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 3: Add the Item Details per order</span>
+<span class="c1"># The &#39;order_items&#39; file holds the physical items bought inside each order (since 1 checkout can have multiple items).</span>
+<span class="c1"># We join this onto our master table using the &#39;order_id&#39; so every order now explicitly contains its individual item rows.</span>
+<span class="n">order_items</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_order_items_dataset.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">order_items</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 4: Add specific Product Details</span>
+<span class="c1"># Now that we know WHAT items were bought, we bring in the master products dataset.</span>
+<span class="c1"># We join it using &#39;product_id&#39; so we can confidently attach specific descriptions and features directly to the physical items.</span>
+<span class="n">products</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;olist_products_dataset_merged.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">products</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;product_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 5: Filter the Universe to only Successful Deliveries</span>
+<span class="c1"># We logically slice the massive table so it only ever keeps completely successful transactions.</span>
+<span class="c1"># Any failed, invoiced, processing, or canceled orders are completely removed here.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;order_status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;delivered&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># STEP 6: Clean Out the Clutter</span>
+<span class="c1"># To keep memory light and analytics focused, we isolate every single irrelevant column. </span>
+<span class="c1"># This includes the now-redundant status string, internal logistical dates, and physical boxing dimensions.</span>
+<span class="n">columns_to_drop</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;customer_id&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;order_status&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;order_purchase_timestamp&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;order_approved_at&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;order_delivered_customer_date&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;order_estimated_delivery_date&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;shipping_limit_date&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;product_category_name&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;product_name_lenght&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;product_description_lenght&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;product_photos_qty&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;product_weight_g&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;product_length_cm&#39;</span><span class="p">,</span>  <span class="c1"># Dropping length</span>
+    <span class="s1">&#39;product_height_cm&#39;</span><span class="p">,</span>  <span class="c1"># Dropping height</span>
+    <span class="s1">&#39;product_width_cm&#39;</span>    <span class="c1"># Dropping width</span>
+<span class="p">]</span>
+
+<span class="c1"># We natively execute the drop command right here via pandas. </span>
+<span class="c1"># `errors=&#39;ignore&#39;` is a safety net: it ensures the script silently continues even if a given column was naturally already missing.</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columns_to_drop</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 7: Safe Storage Output</span>
+<span class="c1"># Finally, we silently export the completely polished, distilled tabular data directly back onto the hard drive.</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Product Affinity Table.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    <div class="output-label">OUTPUT (TOP 5 ROWS): Product Affinity Table</div>
+    <table border="1" class="dataframe dataframe table table-striped table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th>order_id</th>
+      <th>order_delivered_carrier_date</th>
+      <th>customer_unique_id</th>
+      <th>customer_zip_code_prefix</th>
+      <th>customer_city</th>
+      <th>customer_state</th>
+      <th>order_item_id</th>
+      <th>product_id</th>
+      <th>seller_id</th>
+      <th>price</th>
+      <th>freight_value</th>
+      <th>product_category_name_english</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>e481f51cbdc54678b7cc49136f2d6af7</td>
+      <td>2017-10-04 19:55:00</td>
+      <td>7c396fd4830fd04220f754e42b4e5bff</td>
+      <td>3149</td>
+      <td>sao paulo</td>
+      <td>SP</td>
+      <td>1.0</td>
+      <td>87285b34884572647811a353c7ac498a</td>
+      <td>3504c0cb71d7fa48d967e0e4c94d59d9</td>
+      <td>29.99</td>
+      <td>8.72</td>
+      <td>housewares</td>
+    </tr>
+    <tr>
+      <td>53cdb2fc8bc7dce0b6741e2150273451</td>
+      <td>2018-07-26 14:31:00</td>
+      <td>af07308b275d755c9edb36a90c618231</td>
+      <td>47813</td>
+      <td>barreiras</td>
+      <td>BA</td>
+      <td>1.0</td>
+      <td>595fac2a385ac33a80bd5114aec74eb8</td>
+      <td>289cdb325fb7e7f891c38608bf9e0962</td>
+      <td>118.70</td>
+      <td>22.76</td>
+      <td>perfumery</td>
+    </tr>
+    <tr>
+      <td>47770eb9100c2d0c44946d9cf07ec65d</td>
+      <td>2018-08-08 13:50:00</td>
+      <td>3a653a41f6f9fc3d2a113cf8398680e8</td>
+      <td>75265</td>
+      <td>vianopolis</td>
+      <td>GO</td>
+      <td>1.0</td>
+      <td>aa4383b373c6aca5d8797843e5594415</td>
+      <td>4869f7a5dfa277a7dca6462dcf3b52b2</td>
+      <td>159.90</td>
+      <td>19.22</td>
+      <td>auto</td>
+    </tr>
+    <tr>
+      <td>949d5b44dbf5de918fe9c16f97b45f8a</td>
+      <td>2017-11-22 13:39:59</td>
+      <td>7c142cf63193a1473d2e66489a9ae977</td>
+      <td>59296</td>
+      <td>sao goncalo do amarante</td>
+      <td>RN</td>
+      <td>1.0</td>
+      <td>d0b61bfb1de832b15ba9d266ca96e5b0</td>
+      <td>66922902710d126a0e7d26b0e3805106</td>
+      <td>45.00</td>
+      <td>27.20</td>
+      <td>pet_shop</td>
+    </tr>
+    <tr>
+      <td>ad21c59c0840e6cb83a9ceb5573f8159</td>
+      <td>2018-02-14 19:46:34</td>
+      <td>72632f0f9dd73dfee390c9b22eb56dd6</td>
+      <td>9195</td>
+      <td>santo andre</td>
+      <td>SP</td>
+      <td>1.0</td>
+      <td>65266b2da20d04dbe00c5c2d3bb7859e</td>
+      <td>2c9e548be18521d1c43cde1c582c6de8</td>
+      <td>19.90</td>
+      <td>8.72</td>
+      <td>stationery</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="cell">
+    <h2>Step 5: Synthesizing the VIP Target List</h2>
+    <p>Finally, we synthesize the two heaviest RFM weights (Frequency and Monetary) into a master schema. <strong>Why?</strong> By enforcing a strict inner merge across <code>customer_unique_id</code>, we surgically prune any fragmented customers who survived earlier filter cracks (e.g., users who placed an order but failed payment authorization). The resulting VIP table guarantees flawless, 100% delivered, high-value consumer data explicitly ready for complex machine-learning clustering algorithms to target.</p>
+    <div class="code-highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># STEP 1: Load the Aggregates</span>
+<span class="c1"># We silently import the two pre-calculated metrics datasets.</span>
+<span class="n">freq_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Frequency Table.csv&#39;</span><span class="p">)</span>
+<span class="n">mvip_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;M_VIP.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 2: Merge </span>
+<span class="c1"># We explicitly merge them together on the shared identifier.</span>
+<span class="c1"># We are intentionally using an &#39;inner&#39; join. Why? The Frequency table currently holds 96,096 people, </span>
+<span class="c1"># but the Monetary table intentionally holds only 93,358. </span>
+<span class="c1"># This perfectly logical drop occurred because we aggressively filtered the Monetary pipeline </span>
+<span class="c1"># to absolutely only include rows marked completely as &#39;delivered&#39;, whereas the early Frequency </span>
+<span class="c1"># pipeline counted everyone (including people whose items got canceled, failed processing or lost).</span>
+<span class="c1"># An inner join gracefully auto-drops those 2,738 non-delivered customers so our resulting VIP </span>
+<span class="c1"># table strictly reflects genuinely successful orders with actual payments mapped to them.</span>
+<span class="n">vip_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">freq_df</span><span class="p">,</span> <span class="n">mvip_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_unique_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="c1"># STEP 3: Export </span>
+<span class="c1"># Saving the fully combined list out to your hard drive entirely silently.</span>
+<span class="n">vip_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;VIP Table.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    <div class="output-label">OUTPUT (TOP 5 ROWS): Final VIP Table</div>
+    <table border="1" class="dataframe dataframe table table-striped table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th>customer_unique_id</th>
+      <th>frequency</th>
+      <th>payment_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8d50f5eadf50201ccdcedfb9e2ac8455</td>
+      <td>15</td>
+      <td>879.27</td>
+    </tr>
+    <tr>
+      <td>3e43e6105506432c953e165fb2acf44c</td>
+      <td>9</td>
+      <td>1172.66</td>
+    </tr>
+    <tr>
+      <td>6469f99c1f9dfae7733b25662e7f1782</td>
+      <td>7</td>
+      <td>758.83</td>
+    </tr>
+    <tr>
+      <td>ca77025e7201e3b30c44b472ff346268</td>
+      <td>7</td>
+      <td>1122.72</td>
+    </tr>
+    <tr>
+      <td>1b6c7548a2a1f9037c1fd3ddfed95f33</td>
+      <td>7</td>
+      <td>959.01</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="cell">
+    <h2>Step 6: The Marketing Command Center (Tableau Insights)</h2>
+
+    <!-- REVENUE MAP (Full Width) -->
+    <div style="background: #fff; padding: 30px; border-radius: 12px; margin-bottom: 40px; margin-top: 40px;">
+        <h3 style="color: #E50914; margin-top: 0; font-size: 18px; border-bottom: 2px solid #E50914; padding-bottom: 8px;">Question 3: The Economic Heart (Monetary & Geography)</h3>
+        <p style="color: #555; font-size: 14px; margin-bottom: 5px;"><strong>Visual 3:</strong> Geospatial Revenue Map of Brazil</p>
+        <ul style="color: #333; font-size: 14px; margin-bottom: 20px; padding-left: 20px; line-height: 1.8;">
+            <li><strong style="color: #1e1e1e;">The Insight:</strong> Revenue is not evenly distributed. The "Economic Heart" of Olist beats in the Southeast.</li>
+            <li><strong style="color: #1e1e1e;">The Data:</strong> São Paulo (SP) and Rio de Janeiro (RJ) dominate the financial footprint.</li>
+            <li><strong style="color: #E50914;">The Strategy:</strong> Logistics investment (like Express Shipping) should be localized to these high-value hubs to protect our most profitable "Power Centers."</li>
+        </ul>
+        <div class='tableauPlaceholder' id='viz1775304855588' style='position: relative'><noscript><a href='#'><img alt='Brazil Revenue Map ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RevenueMap_17753047352710&#47;BrazilRevenueMap&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='RevenueMap_17753047352710&#47;BrazilRevenueMap' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RevenueMap_17753047352710&#47;BrazilRevenueMap&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775304855588');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </div>
+
+    <!-- RECENCY (Kept together side-by-side) -->
+    <div style="background: #fff; padding: 30px; border-radius: 12px; margin-bottom: 40px;">
+        <h3 style="color: #E50914; margin-top: 0; font-size: 18px; border-bottom: 2px solid #E50914; padding-bottom: 8px;">Question 1: Recency & The Churn Crisis</h3>
+        
+        <div style="color: #333; font-size: 14px; margin-bottom: 20px; line-height: 1.8;">
+            <p style="margin-top: 0;">The analysis below investigates our recent order distributions.</p>
+            <ul style="padding-left: 20px; margin-bottom: 0;">
+                <li><strong style="color: #1e1e1e;">The Insight (Visual 1.1):</strong> The "270-Day Spike." We identified a massive 48-hour event (likely a major sale) 270 days ago that delivered ~1,560 orders.</li>
+                <li><strong style="color: #1e1e1e;">The Problem (Visual 1.1):</strong> None of those 1,560 customers have returned since. They were "Opportunistic Buyers" who churned immediately.</li>
+                <li><strong style="color: #1e1e1e;">The Trend (Visual 1.1):</strong> There is a visible "Empty Zone" in the most recent 0–50 days, showing that the platform is currently acquiring fewer customers than it did in the past.</li>
+                <li><strong style="color: #1e1e1e;">The Insight (Visual 1.2):</strong> By grouping days into 30-day buckets, we see a clear "Staircase to Churn."</li>
+                <li><strong style="color: #E50914;">The Strategy:</strong> Any customer past the 300-day mark is officially "Lapsed." Marketing efforts should focus on the 0–60 day "Active" zone to prevent them from falling down the stairs.</li>
+            </ul>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div>
+                <p style="color: #555; font-size: 14px; margin-bottom: 5px; font-weight: bold;">Visual 1.1: The Recency Scatter Plot</p>
+                <div class='tableauPlaceholder' id='viz1775304807142' style='position: relative'><noscript><a href='#'><img alt='Recency ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;Recency_17753031688230&#47;Recency&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Recency_17753031688230&#47;Recency' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;Recency_17753031688230&#47;Recency&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775304807142');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+            <div>
+                <p style="color: #555; font-size: 14px; margin-bottom: 5px; font-weight: bold;">Visual 1.2: The Recency Bins (Staircase View)</p>
+                <div class='tableauPlaceholder' id='viz1775304820945' style='position: relative'><noscript><a href='#'><img alt='Recency with bins ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RecencyBin&#47;Recencywithbins&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='RecencyBin&#47;Recencywithbins' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;RecencyBin&#47;Recencywithbins&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775304820945');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOP CATEGORY (Graph Left, Text Right) -->
+    <div style="background: #fff; padding: 30px; border-radius: 12px; margin-bottom: 40px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+            <div>
+                <div class='tableauPlaceholder' id='viz1775304880406' style='position: relative'><noscript><a href='#'><img alt='Top Category ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;TopCategory_17753047736120&#47;TopCategory&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='TopCategory_17753047736120&#47;TopCategory' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;TopCategory_17753047736120&#47;TopCategory&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775304880406');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+            <div>
+                <h3 style="color: #E50914; margin-top: 0; font-size: 18px; border-bottom: 2px solid #E50914; padding-bottom: 8px;">Question 4: Product Affinity & Cross-Sell</h3>
+                <p style="color: #555; font-size: 14px; margin-bottom: 5px;"><strong>Visual 4:</strong> Top 10 English Product Categories</p>
+                <ul style="color: #333; font-size: 14px; margin-bottom: 20px; padding-left: 20px; line-height: 1.8;">
+                    <li><strong style="color: #1e1e1e;">The Insight:</strong> By translating the Portuguese categories, we identified Health & Beauty, Watches, and Bed/Bath/Table as the primary drivers.</li>
+                    <li><strong style="color: #E50914;">The Strategy:</strong> These are the "Anchor Categories." When a VIP stops buying, these are the products we should use in "Next Best Offer" re-engagement campaigns.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- FREQUENCY (Graph Left, Text Right) -->
+    <div style="background: #fff; padding: 30px; border-radius: 12px; margin-bottom: 40px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+            <div>
+                <div class='tableauPlaceholder' id='viz1775304842014' style='position: relative'><noscript><a href='#'><img alt='Frequency  ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fr&#47;Frequency_17753046944990&#47;Frequency&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Frequency_17753046944990&#47;Frequency' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fr&#47;Frequency_17753046944990&#47;Frequency&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775304842014');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+            <div>
+                <h3 style="color: #E50914; margin-top: 0; font-size: 18px; border-bottom: 2px solid #E50914; padding-bottom: 8px;">Question 2: Frequency & The "Leaky Bucket"</h3>
+                <p style="color: #555; font-size: 14px; margin-bottom: 5px;"><strong>Visual 2:</strong> The Logarithmic Frequency Distribution</p>
+                <ul style="color: #333; font-size: 14px; margin-bottom: 20px; padding-left: 20px; line-height: 1.8;">
+                    <li><strong style="color: #1e1e1e;">The Insight:</strong> A brutal "Power Law" distribution. 90,500+ customers are "One-time Wonders" (F=1), while only ~3,000 are repeat buyers.</li>
+                    <li><strong style="color: #1e1e1e;">The Problem:</strong> The "First-to-Second Purchase" transition is the biggest bottleneck.</li>
+                    <li><strong style="color: #E50914;">The Strategy:</strong> We don't need to save 90,000 people; we need to double the "Loyal 3,000." This is where the VIP Table comes in.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

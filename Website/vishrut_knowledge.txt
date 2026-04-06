@@ -39,20 +39,22 @@ Project 4: Store Sales Time Series Forecasting (2025)
 Goal: Forecast daily sales across 54 store locations for Corporación Favorita (major Ecuadorian retailer). Used Pandas, XGBoost, feature engineering (lag features, payday effect), and time-series cross-validation. The model delivers a data-driven inventory management framework reducing stockouts and waste.
 Skills: Python, Pandas, XGBoost, Feature Engineering, Time-Series Analysis
 
+Project 5: Online Retail Analysis (2026)
+Goal: Analyze transactional data from a UK-based online retail store (online_retail_II dataset) using Python and Pandas. The project uncovered revenue trends, calculated unique customer contributions globally, and featured an actionable "merging product category" chart to optimize inventory planning.
+Skills: Python, Pandas, Data Cleaning, Temporal Analysis, Visualization
+
 [WORK EXPERIENCE]
-Role: Assistant Manager
-Period: 2023 — after graduation from NIT Rourkela
-Organisation: Newly formed school (educational institution)
+Role: Operations Analyst
+Period: Jul 2023 – Jul 2025
+Organisation: Patriot Schools, Unnao, India
 
-After graduating in 2023, Vishrut joined a newly formed school as Assistant Manager, looking after daily operations, conducting events, and solving day-to-day challenges that come with building something from scratch.
+Scaling & Growth: Orchestrated scaling of the institution from 400 to 700+ students over 2 years through operational process improvements, stakeholder management, and data-driven strategic recommendations to leadership.
 
-Alongside administration, he also taught Mathematics and Physics up to high school level. This was one of the most grounding experiences of his career — having to explain logic clearly to students who had no prior foundation forced him to become a much sharper communicator. He learned how to break down complex ideas into digestible steps, how to read a room, and how to adapt his approach depending on who he was talking to.
+Financial & Operations Management: Monitored branch performance metrics, managed salary distribution via Excel, recognised bottlenecks and communicated recovery strategies to leadership, reducing overhead by 12%.
 
-In the middle of this role, he identified a growing problem: payment defaults were rising. Rather than treating it as a financial issue, he approached it as a data problem. Using Python and Excel, he mapped fee-payment patterns across the student body and discovered a counterintuitive insight — defaults correlated with weak family-school relationships, not income. Families that felt disconnected from the school's community were the ones most likely to default. He designed a targeted programme of structured parent-teacher interactions and proactive outreach to high-risk families. The result: defaults dropped by approximately 15%, recovering around 300,000 INR — without a single legal notice.
+Behavioral Analysis & Impact: Uncovered fee-payment patterns across 200+ families, designed retention interventions reducing the default rate by 15% and recovering 300,000 INR in potential revenue — without a single legal notice.
 
-Looking ahead, the skills Vishrut built in this role — clear communication, data-driven decision making, working under ambiguity, and leading without authority — are directly transferable to a career in global strategy and management consulting. He plans to use these to design more resilient systems at a global scale, where the stakes are higher and the complexity even more interesting.
-
-Skills: Operations Management, Teaching, Data Analysis, Python, Excel, Communication, Leadership
+Skills: Data Analysis, Python, Excel, Operations Management, Financial Modelling, Stakeholder Management
 
 [ACHIEVEMENTS]
 Achievement 1: TOSA Digital — Advanced Level certification in digital tools
@@ -61,7 +63,7 @@ Achievement 3: JEE — Qualified the Joint Entrance Examination for engineering 
 Achievement 4: Won aeromodelling competitions at IIT Kanpur and IIT BHU with Udaan Club
 
 [SKILLS]
-Technical: Python, NumPy, Pandas, Scikit-learn, XGBoost, SQL, Figma, Node.js, HTML, CSS, Git
+Technical: Python, NumPy, Pandas, Scikit-learn, XGBoost, SQL, Power BI, Machine Learning, Figma, Node.js, HTML, CSS, Git
 Business: Global Strategy, Data Analysis, Financial Modelling, Supply Chain, Negotiation
 Methodologies: Agile, Design Thinking, Time-Series Analysis, Feature Engineering, AI Prompting
 

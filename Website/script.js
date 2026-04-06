@@ -194,21 +194,16 @@ Model & Approach: Used gradient-boosted decision trees (XGBoost) to capture non-
 
 Business Impact: The finished model delivers a data-driven inventory management framework — reducing stockouts and waste. The analysis pinpoints the precise effect of oil price volatility on purchasing power, providing actionable insights for strategic planning in emerging markets.`;
 
-    const recoveryText = `Assistant Manager: Patriot Schools, Unnao, India · July 2024 - May 2025
+    const recoveryText = `Operations Analyst — Patriot Schools, Unnao, India · Jul 2023 – Jul 2025
 
-Growth Strategy & Design:
-Orchestrated regional marketing and outreach by leveraging demographic mapping to identify high-potential residential zones, while managing the creative design of all school prospectuses and branding materials.
+Scaling & Growth:
+Orchestrated scaling of the institution from 400 to 700+ students over 2 years through operational process improvements, stakeholder management, and data-driven strategic recommendations to leadership.
 
-Stakeholder & Data Management:
-Directed branch operations and guardian communications to ensure high responsiveness, while developing recovery strategies for fee-structure defaults based on internal data trend analysis.
+Financial & Operations Management:
+Monitored branch performance metrics, managed salary distribution via Excel, recognised bottlenecks and communicated recovery strategies to leadership — reducing overhead by 12%.
 
-Academic and operations Coordinator: Patriot Schools, Unnao, India · July 2023 - June 2024
-
-Instructional Delivery:
-Applied quantitative reasoning to deliver Mathematics and Physics instruction for secondary students, maintaining high academic standards during the branch’s foundational year.
-
-Process Optimization:
-Managed daily administrative workflows and optimized classroom scheduling to increase internal resource utilization and streamline foundational operations.`;
+Behavioral Analysis & Impact:
+Uncovered fee-payment patterns across 200+ families, designed retention interventions reducing the default rate by 15% and recovering 300,000 INR in potential revenue.`;
 
     const aeroText = `Vice - President, Udaan Technical Club — NIT Rourkela
 July 2021 – June 2022
@@ -227,6 +222,17 @@ Vishrut rose to Vice - President.By then, the club had grown from under 10 to ov
 
 The Lasting Impact:
 The trajectory they built hasn't come down since. The club is still growing — bigger and more successful with time. Vishrut is proud of what they built together: not just planes, but a community.`;
+
+    const retailText = `Online Retail Analysis
+
+Goal: Analyze transactional data from a UK-based online retail store to uncover revenue trends and customer behaviour, highlighting patterns through merging product category charts.
+
+Technical Methodology:
+Data Cleaning: Filtered out cancelled orders and invalid invoice numbers using Pandas. Computed Total Revenue for each transaction.
+
+Temporal Analysis: Engineered 'Year-Month' temporal features to evaluate monthly sales trends and understand seasonality.
+
+Category Analysis: A key aspect of the project involved merging product categories. By graphing the top categories, I was able to demonstrate which categories drive the most value, forming an actionable basis for inventory planning.`;
 
     // ── Helper: render text with section headings bold ────────────────────
     function renderText(text) {
@@ -256,6 +262,19 @@ The trajectory they built hasn't come down since. The club is still growing — 
                 modalBody.classList.add('blog-layout');
                 modalImg.src = 'Prisoners.jpg';
                 modalDesc.innerText = prisonersText;
+
+            } else if (dataType === 'retail') {
+                // Online Retail Analysis
+                modalDesc.innerHTML = `
+                    <figure style="float:right;width:50%;margin:4px 0 16px 20px;text-align:center;">
+                        <img src="Top category.png" alt="Merged Product Categories"
+                             style="width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+                        <figcaption style="font-size:0.72rem;color:#7B7B7B;font-style:italic;margin-top:6px;">
+                            Merging Product Category Chart
+                        </figcaption>
+                    </figure>
+                    ${renderText(retailText)}
+                    <div style="clear:both;"></div>`;
 
             } else if (dataType === 'ml') {
                 // Store Sales — text only
