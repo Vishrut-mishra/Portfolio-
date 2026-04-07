@@ -3,9 +3,16 @@
 
 # Node dependencies
 node_modules/
+**/node_modules/
 
 # macOS junk
 .DS_Store
 
 # Vercel local config
 .vercel
+
+# Business Law Presentation build artifacts (source)
+# (We only commit the built /business-law/ folder, not source)
+../Business_Law_Presentation/frontend/node_modules/
+../Business_Law_Presentation/backend/node_modules/
+../Business_Law_Presentation/frontend/dist/
